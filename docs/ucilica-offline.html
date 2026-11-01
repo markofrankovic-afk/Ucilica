@@ -73,6 +73,16 @@ main{flex:1;min-height:0;overflow:auto;padding:16px;display:flex;flex-direction:
 .bowl.drops{position:relative;overflow:hidden}.drop{position:absolute;left:50%;top:-20px;width:22px;height:28px;margin-left:-11px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;box-shadow:0 0 0 2px rgba(0,0,0,.25) inset;animation:dropin .6s ease-in forwards}
 @keyframes dropin{to{top:80px;opacity:0;transform:scale(.6)}}
 .dropcnt{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;min-height:30px;font:700 20px var(--display)}.dropcnt span{display:flex;align-items:center;gap:4px}.dropcnt i{width:20px;height:20px;border-radius:50%;box-shadow:0 0 0 2px var(--line) inset}
+.zn-room.rz{aspect-ratio:4/5;background:linear-gradient(#fff7e6,#ffe9c7)}.rz .zn-bin.rz-bin{bottom:3%;top:auto;height:26%;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:18px;font-weight:800}.rz-bin span{font-size:34px}
+.kb-pic{display:flex;justify-content:center;margin:4px 0 10px}.kb-pic span{font-size:120px;line-height:1;filter:grayscale(1) brightness(1.15);transition:filter 1s}.kb-pic.on span{filter:none}
+.mb-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;width:min(94vw,520px)}.mb-grid.six{grid-template-columns:repeat(4,minmax(0,1fr))}
+.mb-card{border:none;background:none;padding:0;aspect-ratio:3/4;perspective:600px;cursor:pointer}.mb-in{position:relative;width:100%;height:100%;transition:transform .45s;transform-style:preserve-3d}
+.mb-card.up .mb-in{transform:rotateY(180deg)}.mb-back,.mb-front{position:absolute;inset:0;border-radius:16px;display:flex;align-items:center;justify-content:center;backface-visibility:hidden;box-shadow:0 5px 0 var(--line)}
+.mb-back{background:linear-gradient(135deg,#ff7ab8,#8e6cff);font-size:34px}.mb-front{background:var(--card);transform:rotateY(180deg)}.mb-card.done .mb-front{box-shadow:0 0 0 4px #43a047 inset,0 5px 0 var(--line)}.mb-e{font-size:46px}
+.nz-row{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;align-items:center;margin:6px 0 12px;max-width:94vw}.nz-row .mxb.q{width:38px;height:38px;font-size:22px}
+.pbn .pr{fill:#fff;stroke:#2d2a3e;stroke-width:3;cursor:pointer;transition:fill .3s}.pbn .pl text{font:800 22px var(--display,sans-serif);fill:#2d2a3e;text-anchor:middle;dominant-baseline:central;pointer-events:none}
+.pbn-pal{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:10px 0}.pbn-pal button{width:58px;height:58px;border-radius:50%;border:none;color:#fff;font:800 24px var(--display,sans-serif);box-shadow:0 0 0 3px var(--line) inset,0 4px 0 var(--line);cursor:pointer}
+.pbn-pal button.sel{transform:scale(1.15);box-shadow:0 0 0 5px #2d2a3e inset,0 4px 0 var(--line)}
 .pots.many{gap:10px;max-width:400px}.pots.many .pot{width:70px;height:70px}
 .mxb{display:inline-block;border-radius:50%;box-shadow:0 0 0 3px var(--line) inset;flex:none}.mxb.q{width:84px;height:84px;background:#fff;display:inline-flex;align-items:center;justify-content:center;font:700 40px var(--display);color:#aaa}
 .mxq{display:flex;align-items:center;justify-content:center;gap:10px;margin:6px 0 10px}.mxq b{font:700 34px var(--display)}.mxq small{font-weight:800;color:#888}
@@ -342,7 +352,7 @@ function kidForms(n,g){n=(n||'').trim();n=n.charAt(0).toUpperCase()+n.slice(1);c
 let KID=null;try{const k=JSON.parse(localStorage.getItem('ucilica-kid')||'null');if(k&&k.n)KID=Object.assign(kidForms(k.n,k.g),{bd:k.bd||null});}catch(e){}
 if(!KID&&DEFAULT_KID)KID=Object.assign(kidForms(DEFAULT_KID.n,DEFAULT_KID.g),{bd:DEFAULT_KID.bd||null});
 function saveKid(n,g,bd){KID=Object.assign(kidForms(n,g),{bd:bd||null});try{localStorage.setItem('ucilica-kid',JSON.stringify({n:KID.n,g,bd:KID.bd}));}catch(e){}}
-const MASC=[['sama','sam'],['brojala','brojao'],['Dobila','Dobio'],['dobila','dobio'],['Napisala','Napisao'],['Obojila','Obojio'],['Složila','Složio'],['Platila','Platio'],['platila','platio'],['Pronašla','Pronašao'],['pronašla','pronašao'],
+const MASC=[['sama','sam'],['obojila','obojio'],['brojala','brojao'],['Dobila','Dobio'],['dobila','dobio'],['Napisala','Napisao'],['Obojila','Obojio'],['Složila','Složio'],['Platila','Platio'],['platila','platio'],['Pronašla','Pronašao'],['pronašla','pronašao'],
   ['Odsvirala','Odsvirao'],['naučila','naučio'],['Prešla','Prešao'],['Skupila','Skupio'],['prolila','prolio'],['dala','dao'],['čula','čuo'],['Došla','Došao'],['došla','došao'],['izvukla','izvukao'],['ubrala','ubrao'],
   ['nasmijala','nasmijao'],['našla','našao'],['napravila','napravio'],['pojela','pojeo'],['zaželjela','zaželio'],['puhnula','puhnuo'],['otvorila','otvorio'],['stavila','stavio'],['rekla','rekao'],
   ['Igrale su se','Igrali su se'],['Prala','Prao'],['prala','prao'],['Očistila','Očistio'],['Obukla','Obukao'],['Odjenula','Odjenuo'],['Spremila','Spremio'],['spremila','spremio'],['složila','složio'],['Prešla','Prešao'],['stala','stao'],['primila','primio'],['čekala','čekao'],['pogledala','pogledao'],['Zapamtila sam','Zapamtio sam'],['Izgubila sam','Izgubio sam'],['bi ti napravila','bi ti napravio'],['Plačem sama','Plačem sam']];
@@ -517,7 +527,7 @@ document.addEventListener('pointerdown',()=>{if(!greeted){greeted=true;if(!backF
 document.addEventListener('keydown',e=>{if(!curLR||!document.body.contains(curLR[0]))return;if(e.key==='ArrowLeft')curLR[0].click();if(e.key==='ArrowRight')curLR[1].click();});
 
 /* generic module menu */
-function menu(title,color,intro,items){const w=screen(title,home,color);w.appendChild(el('p','hello',intro));
+function menu(title,color,intro,items,back){const w=screen(title,back||home,color);w.appendChild(el('p','hello',intro));
   const g=el('div','tiles');items.forEach(it=>g.appendChild(button('tile',`<span class="ic" style="background:${color}">${it.ic}</span><span class="nm">${it.n}</span>`,()=>{SFX.tap();it.go();},it.n)));
   w.appendChild(g);say(intro,{prompt:true});}
 
@@ -529,7 +539,7 @@ function quiz(cfg){let round=0,score=0;const P=pathCtx;const N=P?2:(cfg.rounds||
     if(q.extra)w.appendChild(q.extra);
     const opts=el('div','opts'+(q.lr?' lr':''));if(q.cols)opts.style.gridTemplateColumns=`repeat(${q.cols},minmax(0,1fr))`;let tries=0,locked=false;
     q.options.forEach(o=>{const b=button('opt'+(o.cls?' '+o.cls:''),o.html,()=>{if(locked||b.classList.contains('no'))return;
-      if(o.v===q.answer){locked=true;b.classList.add('ok');SFX.ok();if(tries===0){score++;addStar();}stat(cfg.stat||cfg.title,tries===0);confetti(40);round++;const fin=()=>{if(document.body.contains(b))next();};if(q.afterEn){say(pick(PRAISE)+(q.after?' '+q.after:''));let dn=false;const go=()=>{if(dn)return;dn=true;setTimeout(fin,900);};sayEn(q.afterEn,{queue:true,onend:go});setTimeout(go,voiceOn&&TTS?6000:900);}else sayThen(pick(PRAISE)+(q.after?' '+q.after:''),fin);}
+      if(o.v===q.answer){locked=true;b.classList.add('ok');SFX.ok();if(q.onOk)try{q.onOk();}catch(_){}if(tries===0){score++;addStar();}stat(cfg.stat||cfg.title,tries===0);confetti(40);round++;const fin=()=>{if(document.body.contains(b))next();};if(q.afterEn){say(pick(PRAISE)+(q.after?' '+q.after:''));let dn=false;const go=()=>{if(dn)return;dn=true;setTimeout(fin,900);};sayEn(q.afterEn,{queue:true,onend:go});setTimeout(go,voiceOn&&TTS?6000:900);}else sayThen(pick(PRAISE)+(q.after?' '+q.after:''),fin);}
       else{tries++;b.classList.add('no');SFX.no();say((o.say?o.say+'. ':'')+'Pokušaj ponovno.');}},o.label||'');opts.appendChild(b);});
     w.appendChild(opts);if(q.lr)curLR=[...opts.children];spk();}
   function done(){if(P){P.score+=score;return P.next();}const w=screen(cfg.title,cfg.back,cfg.color);SFX.win();confetti(140);
@@ -633,10 +643,12 @@ const mixKey=a=>a.slice().sort().join('+');
  ['narančasta','žuta','žutonarančasta'],['narančasta','crvena','crvenonarančasta'],['narančasta','plava','smeđa'],['narančasta','bijela','boja breskve'],['narančasta','crna','smeđa'],
  ['ljubičasta','crvena','boja maline'],['ljubičasta','plava','plavoljubičasta'],['ljubičasta','bijela','lila'],['ljubičasta','crna','tamnoljubičasta'],['ljubičasta','žuta','smeđa']].forEach(([a,b,r])=>MIX2[mixKey([a,b])]=r);
 const BASE5=['crvena','žuta','plava','bijela','crna'];
-function modBoje(){menu('Boje',CC,'Učimo boje!',[{n:'Upoznaj boje',ic:'🎨',go:bojeGrid},{n:'Pronađi boju',ic:'?',go:bojeQuiz},{n:'Miješaj boje',ic:'🥣',go:mijesaj},
-  {n:'Kap po kap',ic:'💧',go:kapi},{n:'Napravi ovu boju',ic:'🧪',go:napraviBoju},{n:'Što će nastati?',ic:'🔮',go:stoNastaje},{n:'Svjetlije – tamnije',ic:'🌗',go:svjetlije},{n:'Recept za boju',ic:'📜',go:recept},{n:'Duga',ic:'🌈',go:duga}]);}
+function modBoje(){menu('Boje',CC,'Učimo boje!',[{n:'Upoznaj boje',ic:'🎨',go:bojeGrid},{n:'Pronađi boju',ic:'?',go:bojeQuiz},{n:'Miješanje boja',ic:'🥣',go:modMijesanje},{n:'Duga',ic:'🌈',go:duga},
+  {n:'Koje je boje?',ic:'🍎',go:kojeBoje},{n:'Razvrstaj po boji',ic:'🧺',go:razvrstaj},{n:'Memorija boja',ic:'🧠',go:memBoje},{n:'Niz boja',ic:'🔁',go:nizBoja},{n:'Bojanje po brojevima',ic:'🔢',go:modPbn},{n:'Boje na engleskom',ic:'🇬🇧',go:bojeEn}]);}
+function modMijesanje(){menu('Miješanje boja',CC,'Što nastaje kad miješamo boje?',[{n:'Miješaj boje',ic:'🥣',go:mijesaj},{n:'Kap po kap',ic:'💧',go:kapi},{n:'Napravi ovu boju',ic:'🧪',go:napraviBoju},
+  {n:'Što će nastati?',ic:'🔮',go:stoNastaje},{n:'Svjetlije – tamnije',ic:'🌗',go:svjetlije},{n:'Recept za boju',ic:'📜',go:recept}],modBoje);}
 function potBtn(nm,fn){const b=button('pot','',fn,nm);b.style.background=PIG[nm].h;b.dataset.n=nm;return b;}
-function mijesaj(){const w=screen('Miješaj boje',modBoje,CC);let sel=[];
+function mijesaj(){const w=screen('Miješaj boje',modMijesanje,CC);let sel=[];
   const pr=el('div','prompt','Odaberi dvije ili tri boje');w.appendChild(pr);const pots=el('div','pots many');const bowl=el('div','bowl');const res=el('div','word','');res.style.textAlign='center';const go=button('btn','🥄 Promiješaj',mix,'Promiješaj');go.disabled=true;
   BASE8.forEach(nm=>{const b=potBtn(nm,()=>{SFX.pop();if(sel.includes(nm)){sel=sel.filter(x=>x!==nm);b.classList.remove('sel');}else{if(sel.length===3){const o=sel.shift();pots.querySelector(`[data-n="${o}"]`).classList.remove('sel');}sel.push(nm);b.classList.add('sel');say(nm);}
     go.disabled=sel.length<2;bowl.style.background=sel.length?`conic-gradient(${sel.map((s,i)=>`${PIG[s].h} ${i/sel.length*360}deg ${(i+1)/sel.length*360}deg`).join(',')})`:'#fff';bowl.classList.remove('swirl');res.textContent='';});pots.appendChild(b);});
@@ -644,7 +656,7 @@ function mijesaj(){const w=screen('Miješaj boje',modBoje,CC);let sel=[];
     setTimeout(()=>{bowl.classList.remove('swirl');bowl.style.background=h;res.textContent=`${sel.join(' + ')} = ${r}`;SFX.ok();confetti(30);
       const names=sel.map((s,i)=>i===0?cap(s):s);say(`${names.slice(0,-1).join(', ')} i ${names[names.length-1]} daju ${accC(r)}!`);},900);}
   w.appendChild(pots);w.appendChild(bowl);w.appendChild(go);w.appendChild(res);say('Odaberi dvije ili tri boje, pa ih promiješaj žlicom.',{prompt:true});}
-function kapi(){const w=screen('Kap po kap',modBoje,CC);const d={};let total=0,lastName='',tm=null;
+function kapi(){const w=screen('Kap po kap',modMijesanje,CC);const d={};let total=0,lastName='',tm=null;
   w.appendChild(el('div','prompt','Dodaj kapi boje i gledaj kako se boja mijenja'));const pots=el('div','pots many');const bowl=el('div','bowl drops');const cnt=el('div','dropcnt');const res=el('div','word','');
   const upd=()=>{cnt.innerHTML=BASE8.filter(n=>d[n]).map(n=>`<span><i style="background:${PIG[n].h}"></i>× ${d[n]}</span>`).join('');const h=mixRGB(d);bowl.style.background=h||'#fff';
     if(!h){res.textContent='';return;}const nm=colorName(h);res.textContent=nm;clearTimeout(tm);if(nm!==lastName){tm=setTimeout(()=>{lastName=nm;say(`Sada je ${nm}.`);},700);}};
@@ -655,7 +667,7 @@ function kapi(){const w=screen('Kap po kap',modBoje,CC);const d={};let total=0,l
   say('Dodiruj boje. Svaki dodir je jedna kap. Probaj puno žute i malo crvene, pa obrnuto!',{prompt:true});}
 function napraviBoju(){const pairs=Object.keys(MIX2).filter(k=>k.split('+').length===2&&(LVL||['crvena+žuta','plava+žuta','crvena+plava','bijela+crvena','bijela+crna'].includes(k)));let last=null;
   const dot2=k=>`<span class="mixopt">${k.split('+').map(n=>`<i style="background:${PIG[n].h}"></i>`).join('<b>+</b>')}</span>`;
-  quiz({title:'Napravi ovu boju',back:modBoje,color:CC,rounds:6,make:()=>{let a;do{a=pick(pairs);}while(a===last&&pairs.length>1);last=a;const r=MIX2[a];const d={};a.split('+').forEach(n=>d[n]=1);
+  quiz({title:'Napravi ovu boju',back:modMijesanje,color:CC,rounds:6,make:()=>{let a;do{a=pick(pairs);}while(a===last&&pairs.length>1);last=a;const r=MIX2[a];const d={};a.split('+').forEach(n=>d[n]=1);
     const op=shuffle([a,...shuffle(pairs.filter(k=>k!==a&&MIX2[k]!==r)).slice(0,LVL?3:2)]);const ex=el('div','');ex.innerHTML=`<div class="bowl" style="background:${namedHex(r)||mixRGB(d)};margin:0 auto;width:130px;height:130px"></div>`;
     return{text:`Kako ćemo dobiti ${accC(r)}?`,speak:`Koje dvije boje trebamo pomiješati da dobijemo ${accC(r)}?`,extra:ex,answer:a,cols:2,after:`${cap(a.split('+')[0])} i ${a.split('+')[1]} daju ${accC(r)}.`,
       options:op.map(k=>({v:k,html:dot2(k),label:k.replace('+',' i '),say:k.replace('+',' i ')}))};}});}
@@ -674,7 +686,7 @@ function bojeDone(title,sk,again,msg,n){const w=screen(title,modBoje,CC);SFX.win
 function stoNastaje(){const easy=['crvena+žuta','plava+žuta','crvena+plava','bijela+crvena','bijela+crna','bijela+plava','crna+plava','plava+zelena','zelena+žuta'];
   const pairs=Object.keys(MIX2).filter(k=>k.split('+').length===2&&(LVL||easy.includes(k)));let last=null;
   const results=[...new Set(Object.values(MIX2))].filter(r=>namedHex(r));
-  quiz({title:'Što će nastati?',stat:'Što će nastati',back:modBoje,color:CC,rounds:6,make:()=>{let a;do{a=pick(pairs);}while(a===last);last=a;const [x,y]=a.split('+');const r=MIX2[a];
+  quiz({title:'Što će nastati?',stat:'Što će nastati',back:modMijesanje,color:CC,rounds:6,make:()=>{let a;do{a=pick(pairs);}while(a===last);last=a;const [x,y]=a.split('+');const r=MIX2[a];
     const ex=el('div','mxq',`${blobC(PIG[x].h,84)}<b>+</b>${blobC(PIG[y].h,84)}<b>=</b><span class="mxb q">?</span>`);
     const wrong=shuffle(results.filter(c=>c!==r&&c!==x&&c!==y)).slice(0,LVL?3:2);const op=shuffle([r,...wrong]);
     return{text:`${cap(x)} i ${y}. Što će nastati?`,speak:`Kad pomiješamo ${PIGA[x]||accC(x)} i ${PIGA[y]||accC(y)}, koja boja nastaje?`,extra:ex,answer:r,cols:2,
@@ -684,7 +696,7 @@ function stoNastaje(){const easy=['crvena+žuta','plava+žuta','crvena+plava','b
 /* ---------- Svjetlije – tamnije ---------- */
 function svjetlije(){const bases=['crvena','plava','zelena','ljubičasta','narančasta'];const b=pick(bases);const n=LVL?5:4;
   const all=[{[b]:1,bijela:4},{[b]:2,bijela:1},{[b]:1},{[b]:2,crna:1},{[b]:1,crna:2}];const steps=(n===5?all:[all[0],all[2],all[3],all[4]]).map(d=>mixRGB(d));
-  const w=screen('Svjetlije – tamnije',modBoje,CC);w.appendChild(el('p','hello','Složi od najsvjetlije do najtamnije!'));
+  const w=screen('Svjetlije – tamnije',modMijesanje,CC);w.appendChild(el('p','hello','Složi od najsvjetlije do najtamnije!'));
   const demo=el('div','mxq',`${blobC('#ffffff',46)}<small>svjetlije</small>${blobC(PIG[b].h,60)}<small>tamnije</small>${blobC('#222222',46)}`);w.appendChild(demo);
   const row=el('div','zn-slots shade');steps.forEach((_,i)=>row.appendChild(el('div','zn-slot',`<b>${i+1}</b>`)));w.appendChild(row);
   const g=el('div','zn-cards');w.appendChild(g);let i=0,miss=0;
@@ -701,7 +713,7 @@ const RECEPTI=[['narančasta',{žuta:2,crvena:1}],['zelena',{žuta:2,plava:1}],[
   ['smeđa',{crvena:1,žuta:1,plava:1}],['lila',{bijela:2,ljubičasta:1}],['boja breskve',{bijela:2,narančasta:1}],['boja maline',{crvena:1,ljubičasta:1}],['tamnoplava',{plava:3,crna:1}]];
 function recept(){let round=0,miss=0;const N=5;const pool=shuffle(RECEPTI.filter(([,d])=>LVL||Object.values(d).reduce((a,b)=>a+b,0)<=3));
   function next(){if(round>=N)return bojeDone('Recept za boju','Recept za boju',recept,'Točno si brojala kapi kao pravi slikar!',miss<3?3:2);
-    const [nm,rec]=pool[round%pool.length];const w=screen('Recept za boju',modBoje,CC);
+    const [nm,rec]=pool[round%pool.length];const w=screen('Recept za boju',modMijesanje,CC);
     const dots=el('div','dots');for(let k=0;k<N;k++)dots.appendChild(el('i',k<round?'on':''));w.appendChild(dots);
     const txt=`Napravi ${accC(nm)}: `+Object.entries(rec).map(([c,n])=>`${KAPW[n]} ${colGen(c)}`).join(' i ')+'.';
     const card=el('div','rcp',`<div class="rcp-t">${blobC(mixRGB(rec),56)}<b>${nm}</b></div><div class="rcp-l">${Object.entries(rec).map(([c,n])=>`<span>${Array(n).fill(`<i style="background:${PIG[c].h}"></i>`).join('')}</span>`).join('<b>+</b>')}</div>`);
@@ -730,6 +742,105 @@ function mixPopup(onDone){const ov=el('div','mxpop');const c=el('div','mxcard');
   const ok=button('btn','🖌️ Uzmi ovu boju',()=>{const h=mixRGB(d);if(!h)return;MYCOL=[h,...MYCOL.filter(x=>x!==h)].slice(0,6);store('myCols',MYCOL);SFX.ok();say(`${cap(colorName(h))}. Sad možeš bojati svojom bojom!`);close();onDone(h);},'Uzmi ovu boju');
   r.appendChild(ok);r.appendChild(button('btn soft','✖',()=>{SFX.tap();close();},'Zatvori'));
   c.appendChild(pots);c.appendChild(bowl);c.appendChild(res);c.appendChild(r);upd();say('Dodaj kapi boja i napravi svoju boju.',{prompt:true});}
+
+/* ================= JOŠ IGARA S BOJAMA ================= */
+const CITEMS={crvena:[['🍓','jagoda'],['🍎','jabuka'],['🍅','rajčica'],['🚒','vatrogasni kamion'],['🐞','bubamara'],['🍒','trešnje'],['🌹','ruža']],
+  žuta:[['🍌','banana'],['🍋','limun'],['🌻','suncokret'],['🐥','pile'],['🧀','sir'],['🌽','kukuruz']],
+  zelena:[['🐸','žaba'],['🥒','krastavac'],['🥦','brokula'],['🍀','djetelina'],['🌲','bor'],['🐢','kornjača'],['🍐','kruška']],
+  plava:[['🫐','borovnice'],['🐳','kit'],['💧','kap vode'],['👖','traperice'],['🧢','kapa'],['🦋','leptir']],
+  narančasta:[['🍊','naranča'],['🥕','mrkva'],['🎃','bundeva'],['🦊','lisica'],['🏀','lopta']],
+  ljubičasta:[['🍇','grožđe'],['🍆','patlidžan'],['☂️','kišobran'],['🔮','kristalna kugla']],
+  smeđa:[['🐻','medvjed'],['🌰','kesten'],['🍫','čokolada'],['🥔','krumpir'],['🪵','drvo']],
+  roza:[['🐷','prase'],['🌸','cvijet'],['🦩','flamingo'],['🎀','mašna']]};
+const COLH=n=>COLORS.find(c=>c.n===n).h;
+const COLA=n=>COLORS.find(c=>c.n===n).a;
+const EN_COL={crvena:'red',plava:'blue',žuta:'yellow',zelena:'green',narančasta:'orange',ljubičasta:'purple',roza:'pink',smeđa:'brown',crna:'black',bijela:'white'};
+
+/* ---------- 1. Razvrstaj po boji ---------- */
+function razvrstaj(){const cols=shuffle(['crvena','žuta','zelena','plava','narančasta','ljubičasta']).slice(0,LVL?4:3);
+  const items=shuffle(cols.flatMap(c=>shuffle(CITEMS[c]).slice(0,LVL?3:3).map(it=>[...it,c])));
+  const w=screen('Razvrstaj po boji',modBoje,CC);w.appendChild(el('p','hello','Odvuci svaku stvar u košaru iste boje!'));
+  const sc=el('div','zn-room rz');w.appendChild(sc);const bins={};
+  cols.forEach((c,i)=>{const d=el('div','zn-bin rz-bin',`<span>🧺</span><small>${c}</small>`);d.style.left=(4+i*(92/cols.length))+'%';d.style.width=(88/cols.length)+'%';d.style.background=COLH(c);d.style.color=c==='žuta'?'#333':'#fff';sc.appendChild(d);bins[c]=d;});
+  let left=items.length,miss=0;
+  items.forEach(([e,nm,c],i)=>{const d=el('div','zn-it',e);let x=6+(i%4)*24+Math.random()*6,y=6+Math.floor(i/4)*18+Math.random()*4;d.style.left=x+'%';d.style.top=y+'%';sc.appendChild(d);let sx,sy,ox,oy,drag=false;
+    d.addEventListener('pointerdown',ev=>{ev.preventDefault();drag=true;sx=ev.clientX;sy=ev.clientY;ox=x;oy=y;d.classList.add('drag');try{d.setPointerCapture(ev.pointerId);}catch(_){}});
+    d.addEventListener('pointermove',ev=>{if(!drag)return;const q=sc.getBoundingClientRect();x=ox+(ev.clientX-sx)/q.width*100;y=oy+(ev.clientY-sy)/q.height*100;d.style.left=x+'%';d.style.top=y+'%';
+      Object.values(bins).forEach(b=>{const r=b.getBoundingClientRect();b.classList.toggle('hot',ev.clientX>r.left&&ev.clientX<r.right&&ev.clientY>r.top&&ev.clientY<r.bottom);});});
+    d.addEventListener('pointerup',ev=>{if(!drag)return;drag=false;d.classList.remove('drag');let hit=null;Object.entries(bins).forEach(([bk,b])=>{const r=b.getBoundingClientRect();b.classList.remove('hot');if(ev.clientX>r.left&&ev.clientX<r.right&&ev.clientY>r.top&&ev.clientY<r.bottom)hit=bk;});
+      if(!hit)return;if(hit===c){SFX.pop();d.classList.add('in');setTimeout(()=>d.remove(),300);left--;say(`${cap(nm)} je ${c}.`);bins[hit].classList.add('boing');setTimeout(()=>bins[hit].classList.remove('boing'),400);
+        if(!left)setTimeout(()=>bojeDone('Razvrstaj po boji','Razvrstaj po boji',razvrstaj,'Sve je u pravoj košari!',miss<2?3:2),700);}
+      else{miss++;SFX.no();x=ox;y=oy;d.style.left=x+'%';d.style.top=y+'%';say(`${cap(nm)} nije ${hit}. Probaj drugu košaru.`);}});});
+  say('Odvuci svaku stvar u košaru iste boje!',{prompt:true});}
+
+/* ---------- 3. Koje je boje? ---------- */
+function kojeBoje(){const cs=Object.keys(CITEMS);let last=null;
+  quiz({title:'Koje je boje?',stat:'Koje je boje',back:modBoje,color:CC,rounds:6,make:()=>{let c,it;do{c=pick(cs);it=pick(CITEMS[c]);}while(it===last);last=it;
+    const ex=el('div','kb-pic',`<span>${it[0]}</span>`);const op=shuffle([c,...shuffle(cs.filter(x=>x!==c)).slice(0,LVL?3:2)]);
+    return{text:`Koje je boje ${it[1]}?`,speak:`Koje je boje ${it[1]}? Oboji je pravom bojom!`,extra:ex,answer:c,cols:op.length===4?2:3,after:`${cap(it[1])} je ${c}.`,onOk:()=>ex.classList.add('on'),
+      options:op.map(x=>({v:x,cls:'mx',html:`${blobC(COLH(x),60)}<span class="lb">${x}</span>`,label:x,say:x}))};}});}
+
+/* ---------- 4. Memorija boja ---------- */
+function memBoje(){const n=LVL?6:4;const cs=shuffle(Object.keys(CITEMS)).slice(0,n);
+  const cards=shuffle(cs.flatMap(c=>{const it=pick(CITEMS[c]);return LVL?[{c,html:blobC(COLH(c),56)},{c,html:`<span class="mb-e">${it[0]}</span>`,nm:it[1]}]:[{c,html:blobC(COLH(c),56)},{c,html:blobC(COLH(c),56)}];}));
+  const w=screen('Memorija boja',modBoje,CC);w.appendChild(el('p','hello',LVL?'Pronađi boju i stvar te boje!':'Pronađi dvije iste boje!'));
+  const g=el('div','mb-grid'+(n>4?' six':''));w.appendChild(g);let open=[],found=0,moves=0,lock=false;
+  cards.forEach(cd=>{const b=button('mb-card',`<div class="mb-in"><div class="mb-back">🎨</div><div class="mb-front">${cd.html}</div></div>`,()=>{if(lock||b.classList.contains('up'))return;
+    b.classList.add('up');SFX.tap();open.push([b,cd]);say(cd.nm||cd.c);
+    if(open.length===2){moves++;const [[b1,c1],[b2,c2]]=open;open=[];
+      if(c1.c===c2.c){found++;setTimeout(()=>{SFX.ok();b1.classList.add('done');b2.classList.add('done');say(`Par! ${cap(c1.c)}.`);
+        if(found===n)setTimeout(()=>bojeDone('Memorija boja','Memorija boja',memBoje,`Pronašla si sve parove u ${moves} poteza!`,moves<=n+3?3:2),800);},400);}
+      else{lock=true;setTimeout(()=>{b1.classList.remove('up');b2.classList.remove('up');lock=false;},1100);}}},'kartica');g.appendChild(b);});
+  say(LVL?'Okreći kartice i pronađi boju i stvar te boje.':'Okreći kartice i pronađi dvije iste boje.',{prompt:true});}
+
+/* ---------- 5. Niz boja ---------- */
+function nizBoja(){const pats=LVL?['AB','AAB','ABB','ABC','AABB','ABCC']:['AB','AB','AAB','ABB','ABC'];let last=null;
+  quiz({title:'Niz boja',stat:'Niz boja',back:modBoje,color:CC,rounds:6,make:()=>{let p;do{p=pick(pats);}while(p===last&&pats.length>1);last=p;
+    const cs=shuffle(['crvena','plava','žuta','zelena','narančasta','ljubičasta','roza']).slice(0,3);const map={A:cs[0],B:cs[1],C:cs[2]};
+    const len=Math.max(6,p.length*2+1);const seq=[...Array(len+1)].map((_,i)=>map[p[i%p.length]]);const ans=seq[len];
+    const ex=el('div','nz-row',seq.slice(0,len).map(c=>blobC(COLH(c),38)).join('')+`<span class="mxb q nz">?</span>`);
+    const op=shuffle([...new Set([ans,...cs])]).slice(0,3);if(!op.includes(ans))op[0]=ans;
+    return{text:'Koja boja dolazi sljedeća?',speak:'Pogledaj niz. Koja boja dolazi sljedeća?',extra:ex,answer:ans,cols:3,after:`Sljedeća je ${ans}.`,onOk:()=>{const q=ex.querySelector('.nz');q.textContent='';q.style.background=COLH(ans);},
+      options:shuffle(op).map(x=>({v:x,cls:'mx',html:`${blobC(COLH(x),56)}<span class="lb">${x}</span>`,label:x,say:x}))};}});}
+
+/* ---------- 7. Bojanje po brojevima ---------- */
+const PBN_COL=[null,['crvena','#e53935'],['žuta','#fdd835'],['plava','#1e63d6'],['zelena','#43a047'],['narančasta','#fb8c00'],['ljubičasta','#8e24aa'],['smeđa','#795548'],['roza','#f48fb1']];
+const PBN=[
+ {n:'Cvijet',s:[['rect','x="186" y="200" width="28" height="140" rx="10"',4],['ellipse','cx="150" cy="270" rx="40" ry="18" transform="rotate(-25 150 270)"',4],['ellipse','cx="250" cy="250" rx="40" ry="18" transform="rotate(25 250 250)"',4],
+   ...[0,1,2,3,4,5].map(i=>{const a=i*Math.PI/3;return['circle',`cx="${(200+Math.cos(a)*58).toFixed(0)}" cy="${(140+Math.sin(a)*58).toFixed(0)}" r="36"`,8];}),['circle','cx="200" cy="140" r="34"',2],
+   ['polygon','points="130,330 270,330 252,390 148,390"',5],['circle','cx="60" cy="60" r="34"',2]]},
+ {n:'Kućica',s:[['rect','x="20" y="330" width="360" height="56" rx="10"',4],['rect','x="250" y="70" width="34" height="70"',1,[267,92]],['polygon','points="200,60 330,170 70,170"',1],['rect','x="90" y="170" width="220" height="160"',2,[130,295]],
+   ['rect','x="175" y="240" width="50" height="90" rx="6"',7],['rect','x="110" y="200" width="46" height="46" rx="4"',3],['rect','x="244" y="200" width="46" height="46" rx="4"',3],['circle','cx="350" cy="50" r="30"',2]]},
+ {n:'Ribica',s:[['rect','x="10" y="10" width="380" height="380" rx="20"',3],['polygon','points="80,200 20,140 20,260"',5],['ellipse','cx="180" cy="200" rx="110" ry="70"',5],['polygon','points="150,135 210,80 230,138"',1],
+   ['circle','cx="240" cy="180" r="16"',8],['path','d="M60 390 q-20 -60 0 -110 q20 50 10 110z"',4],['path','d="M330 390 q-24 -70 6 -130 q16 70 8 130z"',4],['circle','cx="320" cy="90" r="18"',8],['circle','cx="345" cy="50" r="12"',8]]},
+ {n:'Duga',s:[...[1,5,2,4,3,6].map((c,i)=>{const r1=180-i*24,r2=r1-24;return['path',`d="M${200-r1} 300 A${r1} ${r1} 0 0 1 ${200+r1} 300 L${200+r2} 300 A${r2} ${r2} 0 0 0 ${200-r2} 300Z"`,c,[200-(r1+r2)/2,284]];}),
+   ['circle','cx="340" cy="60" r="30"',2],['rect','x="10" y="300" width="380" height="88" rx="14"',4]]},
+ {n:'Baloni',s:[...[[120,140,1],[200,110,3],[280,140,2],[160,210,4],[240,210,6]].map(([x,y,c])=>['ellipse',`cx="${x}" cy="${y}" rx="42" ry="54"`,c]),['rect','x="160" y="320" width="80" height="56" rx="8"',7],['circle','cx="50" cy="50" r="26"',2]]},
+];
+function modPbn(){const w=screen('Bojanje po brojevima',modBoje,CC);w.appendChild(el('p','hello','Odaberi sliku'));const g=el('div','thumbs');
+  PBN.forEach((p,i)=>g.appendChild(button('',pbnSvg(i,true)+`<span>${p.n}</span>`,()=>{SFX.tap();pbnPage(i);},p.n)));w.appendChild(g);
+  say('Svaki broj ima svoju boju. Odaberi sliku!',{prompt:true});}
+function pbnSvg(i,thumb){const p=PBN[i];return `<svg viewBox="0 0 400 400" class="pbn">${p.s.map(([t,a,c,lp],k)=>`<${t} class="pr" data-k="${k}" data-c="${c}"${lp?` data-lx="${lp[0]}" data-ly="${lp[1]}"`:''} ${a}${thumb?` style="fill:${PBN_COL[c][1]}"`:''}/>`).join('')}<g class="pl"></g></svg>`;}
+function pbnPage(i){const p=PBN[i];const w=screen('Po brojevima: '+p.n,modPbn,CC);const box=el('div','svgbox',pbnSvg(i));w.appendChild(box);const svg=box.querySelector('svg');const lg=svg.querySelector('.pl');
+  const used=[...new Set(p.s.map(x=>x[2]))].sort((a,b)=>a-b);let cur=used[0],left=p.s.length,miss=0;
+  requestAnimationFrame(()=>svg.querySelectorAll('.pr').forEach(sh=>{const b=sh.getBBox();let cx=b.x+b.width/2,cy=b.y+b.height/2;if(sh.dataset.lx){cx=+sh.dataset.lx;cy=+sh.dataset.ly;}if(sh.tagName==='rect'&&b.width>300&&b.height>300){cx=b.x+30;cy=b.y+34;}
+    lg.insertAdjacentHTML('beforeend',`<text x="${cx}" y="${cy}" data-k="${sh.dataset.k}">${sh.dataset.c}</text>`);}));
+  const pal=el('div','pbn-pal');used.forEach(c=>{const b=button(c===cur?'sel':'',`<b>${c}</b>`,()=>{cur=c;[...pal.children].forEach(x=>x.classList.toggle('sel',x===b));SFX.tap();say(`${c}. ${PBN_COL[c][0]}`);},PBN_COL[c][0]);b.style.background=PBN_COL[c][1];if(c===2)b.style.color='#333';pal.appendChild(b);});
+  w.appendChild(pal);
+  svg.addEventListener('click',e=>{const sh=e.target.closest('.pr');if(!sh||sh.classList.contains('done'))return;const c=+sh.dataset.c;
+    if(c===cur){sh.style.fill=PBN_COL[c][1];sh.classList.add('done');const t=lg.querySelector(`text[data-k="${sh.dataset.k}"]`);if(t)t.remove();SFX.pop();left--;
+      if(!left)setTimeout(()=>bojeDone('Bojanje po brojevima','Po brojevima',()=>pbnPage(i),'Sve si obojila po brojevima!',miss<3?3:2),600);}
+    else{miss++;SFX.no();sh.classList.add('shake');setTimeout(()=>sh.classList.remove('shake'),400);say(`Ovdje piše ${c}. Broj ${c} je ${PBN_COL[c][0]}.`);}});
+  say('Odaberi boju s brojem, pa dodirni polja s tim brojem.',{prompt:true});}
+
+/* ---------- 10. Boje na engleskom ---------- */
+function bojeEn(){const w=screen('Boje na engleskom',modBoje,CC);const g=el('div','tiles');
+  COLORS.forEach(c=>g.appendChild(button('tile',`<span style="width:80px;height:80px;display:block">${blob(c.h)}</span><span class="nm">${EN_COL[c.n]}</span><small class="sub">${c.n}</small>`,()=>{SFX.tap();sayHrEn(cap(c.n)+' se na engleskom kaže',EN_COL[c.n]);},EN_COL[c.n])));
+  w.appendChild(g);const r=el('div','row');r.appendChild(button('btn','🎧 Touch the…',bojeEnQuiz));w.appendChild(r);say('Dodirni boju i poslušaj kako se kaže na engleskom.',{prompt:true});}
+function bojeEnQuiz(){const pool=COLORS.filter(c=>LVL||['crvena','plava','žuta','zelena','narančasta','ljubičasta','roza','crna'].includes(c.n));
+  quiz({title:'Touch the…',stat:'Boje engleski',back:bojeEn,color:CC,rounds:6,make:()=>{const a=pick(pool);const op=options(pool,a,LVL?4:3,x=>x.n);
+    return{text:'Poslušaj i dodirni!',speak:'',speakFn:()=>sayEn(`Touch the ${EN_COL[a.n]} one!`),answer:a.n,cols:op.length===4?2:3,after:`${cap(a.n)} je`,afterEn:EN_COL[a.n],
+      options:op.map(x=>({v:x.n,html:blob(x.h),label:x.n,say:`To je ${x.n}`}))};}});}
 
 const DUGA=[['crvena','#e53935'],['narančasta','#fb8c00'],['žuta','#fdd835'],['zelena','#43a047'],['plava','#1e88e5'],['modra','#3949ab'],['ljubičasta','#8e24aa']];
 function duga(){const w=screen('Duga',modBoje,CC);const drag=!!LVL;let next=0,miss=0,done=0;
@@ -1788,7 +1899,7 @@ function modVrt(kind='vrt'){const S0=SHOPS[kind];const data=load('vrt',{vrt:[],s
 /* ================= MEDALJE I NALJEPNICE ================= */
 const AREAS=[['Slova','🔤',['Pronađi slovo','Prvo slovo']],['Čitanje','📗',['Čitanje']],['Pisanje','✏️',['Pisanje'],[1,10,30]],['Brojke','🔢',['Pronađi broj','Što je više?','Brojke']],
   ['Računanje','➕',['Prebroji','Zbrajanje','Oduzimanje','Računanje']],['Novac i sat','💶',['Novac','Sat']],['Oblici','🔺',['Pronađi oblik']],['Logika','🧩',['Logika']],['Kviz','❓',['Kviz']],
-  ['Boje','🎨',['Pronađi boju','Napravi ovu boju','Duga','Što će nastati','Svjetlije tamnije','Recept za boju']],['Životinje','🐄',['Tko to kaže?','Pronađi životinju']],['Svijet oko nas','🌍',['Svijet']],['Osjećaji','😊',['Osjećaji']],['Slikovnice','📖',['Slikovnice'],[3,10,25]],
+  ['Boje','🎨',['Pronađi boju','Napravi ovu boju','Duga','Što će nastati','Svjetlije tamnije','Recept za boju','Razvrstaj po boji','Koje je boje','Memorija boja','Niz boja','Po brojevima','Boje engleski']],['Životinje','🐄',['Tko to kaže?','Pronađi životinju']],['Svijet oko nas','🌍',['Svijet']],['Osjećaji','😊',['Osjećaji']],['Slikovnice','📖',['Slikovnice'],[3,10,25]],
   ['Moja Hrvatska','🛡️',['Hrvatska']],['Linije i točkice','〰️',['Linije'],[3,12,30]],['Bojanka','🖍️',['Bojanka'],[1,5,12]],['Glazba','🎹',['Glazba'],[1,3,6]],['Brojalice','👆',['Brojalice'],[1,5,15]],
   ['Engleski','🇬🇧',['Engleski']],['Kalendar','📅',['Kalendar']],['Promet','🚦',['Promet','Svijet: promet']],['Mali programer','🤖',['Programer'],[1,6,15]],['Usporedi','⚖️',['Usporedi']],
   ['Tijelo i zdravlje','🦷',['Zdravlje']],['Zanimanja','👩‍🚒',['Zanimanja']],['Razvrstaj otpad','♻️',['Otpad']],['Svemir','🪐',['Svemir']],['Advent','🎄',['Advent'],[1,10,24]],['Snimi glas','🎤',['Snimi glas'],[1,5,15]],['Rođendan','🎂',['__bday'],[1,2,3]],
