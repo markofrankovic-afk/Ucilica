@@ -73,6 +73,14 @@ main{flex:1;min-height:0;overflow:auto;padding:16px;display:flex;flex-direction:
 .bowl.drops{position:relative;overflow:hidden}.drop{position:absolute;left:50%;top:-20px;width:22px;height:28px;margin-left:-11px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;box-shadow:0 0 0 2px rgba(0,0,0,.25) inset;animation:dropin .6s ease-in forwards}
 @keyframes dropin{to{top:80px;opacity:0;transform:scale(.6)}}
 .dropcnt{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;min-height:30px;font:700 20px var(--display)}.dropcnt span{display:flex;align-items:center;gap:4px}.dropcnt i{width:20px;height:20px;border-radius:50%;box-shadow:0 0 0 2px var(--line) inset}
+.pots.many{gap:10px;max-width:400px}.pots.many .pot{width:70px;height:70px}
+.mxb{display:inline-block;border-radius:50%;box-shadow:0 0 0 3px var(--line) inset;flex:none}.mxb.q{width:84px;height:84px;background:#fff;display:inline-flex;align-items:center;justify-content:center;font:700 40px var(--display);color:#aaa}
+.mxq{display:flex;align-items:center;justify-content:center;gap:10px;margin:6px 0 10px}.mxq b{font:700 34px var(--display)}.mxq small{font-weight:800;color:#888}
+.opt.mx{flex-direction:column;gap:6px}.opt.mx .lb{font-size:17px;line-height:1.1;text-align:center}.zn-slots.shade .zn-slot{display:flex;align-items:center;justify-content:center}
+.rcp{background:var(--card);border-radius:22px;padding:12px 18px;box-shadow:0 6px 0 var(--line);margin-bottom:10px;text-align:center}.rcp-t{display:flex;align-items:center;gap:10px;justify-content:center;font:700 24px var(--display)}
+.rcp-l{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:8px;flex-wrap:wrap}.rcp-l span{display:flex;gap:4px}.rcp-l i{width:26px;height:34px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;box-shadow:0 0 0 2px var(--line) inset}.rcp-l b{font:700 26px var(--display)}
+.mxpop{position:fixed;inset:0;background:rgba(30,25,50,.45);display:flex;align-items:center;justify-content:center;z-index:900;padding:12px}.mxcard{background:var(--bg,#f6f5fb);border-radius:26px;padding:16px;display:flex;flex-direction:column;align-items:center;gap:10px;max-width:440px;width:100%;max-height:96vh;overflow:auto}
+.mxcard .bowl{width:140px;height:140px}.pal .mixbtn{font-size:22px;background:#fff;border:2px dashed #b9b6cc}.pal button.mine{outline:3px dotted #fff;outline-offset:-6px}
 .mixopt{display:flex;align-items:center;gap:6px;justify-content:center}.mixopt i{width:44px;height:44px;border-radius:50%;box-shadow:0 0 0 3px var(--line) inset}.mixopt b{font:700 30px var(--display)}
 .duga-box{width:min(94vw,640px)}.duga-svg{width:100%;height:auto;display:block;touch-action:none}
 .dg-arc{fill:#fff;stroke:#2d2a3e;stroke-width:2.5;stroke-dasharray:7 5;transition:fill .4s}.dg-arc.ok{stroke-dasharray:none}.dg-arc.nx{animation:nx 1s infinite}.dg-arc.hot{fill:#eee}
@@ -334,7 +342,7 @@ function kidForms(n,g){n=(n||'').trim();n=n.charAt(0).toUpperCase()+n.slice(1);c
 let KID=null;try{const k=JSON.parse(localStorage.getItem('ucilica-kid')||'null');if(k&&k.n)KID=Object.assign(kidForms(k.n,k.g),{bd:k.bd||null});}catch(e){}
 if(!KID&&DEFAULT_KID)KID=Object.assign(kidForms(DEFAULT_KID.n,DEFAULT_KID.g),{bd:DEFAULT_KID.bd||null});
 function saveKid(n,g,bd){KID=Object.assign(kidForms(n,g),{bd:bd||null});try{localStorage.setItem('ucilica-kid',JSON.stringify({n:KID.n,g,bd:KID.bd}));}catch(e){}}
-const MASC=[['sama','sam'],['Dobila','Dobio'],['dobila','dobio'],['Napisala','Napisao'],['Obojila','Obojio'],['Složila','Složio'],['Platila','Platio'],['platila','platio'],['Pronašla','Pronašao'],['pronašla','pronašao'],
+const MASC=[['sama','sam'],['brojala','brojao'],['Dobila','Dobio'],['dobila','dobio'],['Napisala','Napisao'],['Obojila','Obojio'],['Složila','Složio'],['Platila','Platio'],['platila','platio'],['Pronašla','Pronašao'],['pronašla','pronašao'],
   ['Odsvirala','Odsvirao'],['naučila','naučio'],['Prešla','Prešao'],['Skupila','Skupio'],['prolila','prolio'],['dala','dao'],['čula','čuo'],['Došla','Došao'],['došla','došao'],['izvukla','izvukao'],['ubrala','ubrao'],
   ['nasmijala','nasmijao'],['našla','našao'],['napravila','napravio'],['pojela','pojeo'],['zaželjela','zaželio'],['puhnula','puhnuo'],['otvorila','otvorio'],['stavila','stavio'],['rekla','rekao'],
   ['Igrale su se','Igrali su se'],['Prala','Prao'],['prala','prao'],['Očistila','Očistio'],['Obukla','Obukao'],['Odjenula','Odjenuo'],['Spremila','Spremio'],['spremila','spremio'],['složila','složio'],['Prešla','Prešao'],['stala','stao'],['primila','primio'],['čekala','čekao'],['pogledala','pogledao'],['Zapamtila sam','Zapamtio sam'],['Izgubila sam','Izgubio sam'],['bi ti napravila','bi ti napravio'],['Plačem sama','Plačem sam']];
@@ -604,14 +612,14 @@ const RYB=[[1,1,1],[.9,.22,.21],[.99,.85,.21],[.98,.55,0],[.12,.39,.84],[.56,.14
 function ryb2rgb(r,y,b){const L=(a,c,t)=>a+(c-a)*t;const C=i=>RYB[i];const out=[0,1,2].map(k=>{
     const c00=L(C(0)[k],C(1)[k],r),c01=L(C(4)[k],C(5)[k],r),c10=L(C(2)[k],C(3)[k],r),c11=L(C(6)[k],C(7)[k],r);
     return L(L(c00,c10,y),L(c01,c11,y),b);});return out;}
-const PIG={crvena:{h:'#e53935',v:[1,0,0]},žuta:{h:'#fdd835',v:[0,1,0]},plava:{h:'#1e63d6',v:[0,0,1]},bijela:{h:'#ffffff',w:1},crna:{h:'#222222',k:1}};
-const PIGA={crvena:'crvenu',žuta:'žutu',plava:'plavu',bijela:'bijelu',crna:'crnu'};
+const PIG={crvena:{h:'#e53935',v:[1,0,0]},žuta:{h:'#fdd835',v:[0,1,0]},plava:{h:'#1e63d6',v:[0,0,1]},bijela:{h:'#ffffff',w:1},crna:{h:'#222222',k:1},zelena:{h:'#43a047',v:[0,1,1]},narančasta:{h:'#fb8c00',v:[1,1,0]},ljubičasta:{h:'#8e24aa',v:[1,0,1]}};
+const PIGA={crvena:'crvenu',žuta:'žutu',plava:'plavu',bijela:'bijelu',crna:'crnu',zelena:'zelenu',narančasta:'narančastu',ljubičasta:'ljubičastu'};
 function mixRGB(drops){let r=0,y=0,b=0,w=0,k=0,n=0;Object.entries(drops).forEach(([nm,c])=>{if(!c)return;const p=PIG[nm];n+=c;if(p.w)w+=c;else if(p.k)k+=c;else{r+=p.v[0]*c;y+=p.v[1]*c;b+=p.v[2]*c;}});
   if(!n)return null;let rgb;const m=Math.max(r,y,b);if(m>0){rgb=ryb2rgb(r/m,y/m,b/m);}else rgb=k?[.13,.13,.13]:[1,1,1];
   if(m>0||k){const wf=w/n*.9;rgb=rgb.map(v=>v+(1-v)*wf);}if(m>0||w){const kf=k/n*.8;rgb=rgb.map(v=>v*(1-kf)+.1*kf);}
   return '#'+rgb.map(v=>Math.round(Math.max(0,Math.min(1,v))*255).toString(16).padStart(2,'0')).join('');}
 const NAMED=[['crvena','#e53935'],['narančasta','#fb8c00'],['žuta','#fdd835'],['zelena','#43a047'],['plava','#1e63d6'],['ljubičasta','#8e24aa'],['roza','#f8a5c2'],['svjetloplava','#90caf9'],
-  ['svijetložuta','#fff59d'],['svijetlozelena','#a5d6a7'],['smeđa','#6d4c2f'],['siva','#9e9e9e'],['crna','#222222'],['bijela','#ffffff'],['tamnoplava','#1a237e'],['tamnozelena','#1b5e20'],['tamnocrvena','#7f1d1d'],['lila','#ce93d8'],['maslinasta','#808000'],['boja breskve','#ffbe98'],['tamnoljubičasta','#4a148c'],['staroroza','#c48b9f'],['sivoplava','#7b8fa8'],['bež','#d8c8a0'],['žutonarančasta','#fdb827'],['crvenonarančasta','#f4511e']];
+  ['svijetložuta','#fff59d'],['svijetlozelena','#a5d6a7'],['smeđa','#6d4c2f'],['siva','#9e9e9e'],['crna','#222222'],['bijela','#ffffff'],['tamnoplava','#1a237e'],['tamnozelena','#1b5e20'],['tamnocrvena','#7f1d1d'],['lila','#ce93d8'],['maslinasta','#808000'],['boja breskve','#ffbe98'],['tamnoljubičasta','#4a148c'],['staroroza','#c48b9f'],['sivoplava','#7b8fa8'],['bež','#d8c8a0'],['žutonarančasta','#fdb827'],['crvenonarančasta','#f4511e'],['tirkizna','#00a5b5'],['žutozelena','#9ccc3d'],['boja maline','#c2185b'],['plavoljubičasta','#5e35b1']];
 const namedHex=n=>(NAMED.find(x=>x[0]===n)||[])[1];
 const hx=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16));
 function colorName(h){const a=hx(h);let best=null,bd=1e9;NAMED.forEach(([n,c])=>{const b=hx(c);const d=(a[0]-b[0])**2*2+(a[1]-b[1])**2*4+(a[2]-b[2])**2*3;if(d<bd){bd=d;best=n;}});return best;}
@@ -621,23 +629,26 @@ const MIX2={'crvena+žuta':'narančasta','plava+žuta':'zelena','crvena+plava':'
   'crvena+plava+žuta':'smeđa','bijela+crvena+žuta':'boja breskve','bijela+crvena+plava':'lila','bijela+plava+žuta':'svijetlozelena','crna+crvena+žuta':'smeđa','crna+plava+žuta':'tamnozelena',
   'crna+crvena+plava':'tamnoljubičasta','bijela+crna+crvena':'staroroza','bijela+crna+plava':'sivoplava','bijela+crna+žuta':'bež'};
 const mixKey=a=>a.slice().sort().join('+');
+[['zelena','žuta','žutozelena'],['zelena','plava','tirkizna'],['zelena','crvena','smeđa'],['zelena','bijela','svijetlozelena'],['zelena','crna','tamnozelena'],
+ ['narančasta','žuta','žutonarančasta'],['narančasta','crvena','crvenonarančasta'],['narančasta','plava','smeđa'],['narančasta','bijela','boja breskve'],['narančasta','crna','smeđa'],
+ ['ljubičasta','crvena','boja maline'],['ljubičasta','plava','plavoljubičasta'],['ljubičasta','bijela','lila'],['ljubičasta','crna','tamnoljubičasta'],['ljubičasta','žuta','smeđa']].forEach(([a,b,r])=>MIX2[mixKey([a,b])]=r);
 const BASE5=['crvena','žuta','plava','bijela','crna'];
 function modBoje(){menu('Boje',CC,'Učimo boje!',[{n:'Upoznaj boje',ic:'🎨',go:bojeGrid},{n:'Pronađi boju',ic:'?',go:bojeQuiz},{n:'Miješaj boje',ic:'🥣',go:mijesaj},
-  {n:'Kap po kap',ic:'💧',go:kapi},{n:'Napravi ovu boju',ic:'🧪',go:napraviBoju},{n:'Duga',ic:'🌈',go:duga}]);}
+  {n:'Kap po kap',ic:'💧',go:kapi},{n:'Napravi ovu boju',ic:'🧪',go:napraviBoju},{n:'Što će nastati?',ic:'🔮',go:stoNastaje},{n:'Svjetlije – tamnije',ic:'🌗',go:svjetlije},{n:'Recept za boju',ic:'📜',go:recept},{n:'Duga',ic:'🌈',go:duga}]);}
 function potBtn(nm,fn){const b=button('pot','',fn,nm);b.style.background=PIG[nm].h;b.dataset.n=nm;return b;}
 function mijesaj(){const w=screen('Miješaj boje',modBoje,CC);let sel=[];
-  const pr=el('div','prompt','Odaberi dvije ili tri boje');w.appendChild(pr);const pots=el('div','pots');const bowl=el('div','bowl');const res=el('div','word','');res.style.textAlign='center';const go=button('btn','🥄 Promiješaj',mix,'Promiješaj');go.disabled=true;
-  BASE5.forEach(nm=>{const b=potBtn(nm,()=>{SFX.pop();if(sel.includes(nm)){sel=sel.filter(x=>x!==nm);b.classList.remove('sel');}else{if(sel.length===3){const o=sel.shift();pots.querySelector(`[data-n="${o}"]`).classList.remove('sel');}sel.push(nm);b.classList.add('sel');say(nm);}
+  const pr=el('div','prompt','Odaberi dvije ili tri boje');w.appendChild(pr);const pots=el('div','pots many');const bowl=el('div','bowl');const res=el('div','word','');res.style.textAlign='center';const go=button('btn','🥄 Promiješaj',mix,'Promiješaj');go.disabled=true;
+  BASE8.forEach(nm=>{const b=potBtn(nm,()=>{SFX.pop();if(sel.includes(nm)){sel=sel.filter(x=>x!==nm);b.classList.remove('sel');}else{if(sel.length===3){const o=sel.shift();pots.querySelector(`[data-n="${o}"]`).classList.remove('sel');}sel.push(nm);b.classList.add('sel');say(nm);}
     go.disabled=sel.length<2;bowl.style.background=sel.length?`conic-gradient(${sel.map((s,i)=>`${PIG[s].h} ${i/sel.length*360}deg ${(i+1)/sel.length*360}deg`).join(',')})`:'#fff';bowl.classList.remove('swirl');res.textContent='';});pots.appendChild(b);});
-  function mix(){if(sel.length<2)return;const r=MIX2[mixKey(sel)];const d={};sel.forEach(s=>d[s]=1);const h=namedHex(r)||mixRGB(d);bowl.classList.add('swirl');SFX.tap();
+  function mix(){if(sel.length<2)return;const r=mixName(sel);const h=mixHex(sel);bowl.classList.add('swirl');SFX.tap();
     setTimeout(()=>{bowl.classList.remove('swirl');bowl.style.background=h;res.textContent=`${sel.join(' + ')} = ${r}`;SFX.ok();confetti(30);
       const names=sel.map((s,i)=>i===0?cap(s):s);say(`${names.slice(0,-1).join(', ')} i ${names[names.length-1]} daju ${accC(r)}!`);},900);}
   w.appendChild(pots);w.appendChild(bowl);w.appendChild(go);w.appendChild(res);say('Odaberi dvije ili tri boje, pa ih promiješaj žlicom.',{prompt:true});}
 function kapi(){const w=screen('Kap po kap',modBoje,CC);const d={};let total=0,lastName='',tm=null;
-  w.appendChild(el('div','prompt','Dodaj kapi boje i gledaj kako se boja mijenja'));const pots=el('div','pots');const bowl=el('div','bowl drops');const cnt=el('div','dropcnt');const res=el('div','word','');
-  const upd=()=>{cnt.innerHTML=BASE5.filter(n=>d[n]).map(n=>`<span><i style="background:${PIG[n].h}"></i>× ${d[n]}</span>`).join('');const h=mixRGB(d);bowl.style.background=h||'#fff';
+  w.appendChild(el('div','prompt','Dodaj kapi boje i gledaj kako se boja mijenja'));const pots=el('div','pots many');const bowl=el('div','bowl drops');const cnt=el('div','dropcnt');const res=el('div','word','');
+  const upd=()=>{cnt.innerHTML=BASE8.filter(n=>d[n]).map(n=>`<span><i style="background:${PIG[n].h}"></i>× ${d[n]}</span>`).join('');const h=mixRGB(d);bowl.style.background=h||'#fff';
     if(!h){res.textContent='';return;}const nm=colorName(h);res.textContent=nm;clearTimeout(tm);if(nm!==lastName){tm=setTimeout(()=>{lastName=nm;say(`Sada je ${nm}.`);},700);}};
-  BASE5.forEach(nm=>pots.appendChild(potBtn(nm,()=>{if(total>=15){SFX.no();say('Zdjela je puna! Prolij je pa kreni ispočetka.');return;}d[nm]=(d[nm]||0)+1;total++;SFX.pop();
+  BASE8.forEach(nm=>pots.appendChild(potBtn(nm,()=>{if(total>=15){SFX.no();say('Zdjela je puna! Prolij je pa kreni ispočetka.');return;}d[nm]=(d[nm]||0)+1;total++;SFX.pop();
     const k=el('span','drop');k.style.background=PIG[nm].h;bowl.appendChild(k);setTimeout(()=>k.remove(),600);upd();})));
   const r=el('div','row');r.appendChild(button('btn soft','🫗 Prolij',()=>{Object.keys(d).forEach(k=>delete d[k]);total=0;lastName='';SFX.tap();upd();say('Zdjela je prazna.');},'Prolij'));
   w.appendChild(pots);w.appendChild(bowl);w.appendChild(cnt);w.appendChild(res);w.appendChild(r);
@@ -648,6 +659,78 @@ function napraviBoju(){const pairs=Object.keys(MIX2).filter(k=>k.split('+').leng
     const op=shuffle([a,...shuffle(pairs.filter(k=>k!==a&&MIX2[k]!==r)).slice(0,LVL?3:2)]);const ex=el('div','');ex.innerHTML=`<div class="bowl" style="background:${namedHex(r)||mixRGB(d)};margin:0 auto;width:130px;height:130px"></div>`;
     return{text:`Kako ćemo dobiti ${accC(r)}?`,speak:`Koje dvije boje trebamo pomiješati da dobijemo ${accC(r)}?`,extra:ex,answer:a,cols:2,after:`${cap(a.split('+')[0])} i ${a.split('+')[1]} daju ${accC(r)}.`,
       options:op.map(k=>({v:k,html:dot2(k),label:k.replace('+',' i '),say:k.replace('+',' i ')}))};}});}
+/* --- miješanje 2: sekundarne boje u loncima, Što će nastati, Svjetlije-tamnije, Recept, miješanje u bojanci --- */
+const BASE8=['crvena','žuta','plava','zelena','narančasta','ljubičasta','bijela','crna'];
+const colGen=n=>n.endsWith('a')?n.slice(0,-1)+'e':n; /* crvena -> crvene */
+const KAPW=['','jedna kap','dvije kapi','tri kapi','četiri kapi','pet kapi'];
+function mixName(sel){const k=mixKey(sel);if(MIX2[k])return MIX2[k];const d={};sel.forEach(s=>d[s]=(d[s]||0)+1);return colorName(mixRGB(d));}
+function mixHex(sel){const r=MIX2[mixKey(sel)];const d={};sel.forEach(s=>d[s]=(d[s]||0)+1);return (r&&namedHex(r))||mixRGB(d);}
+const blobC=(h,s=70)=>`<span class="mxb" style="width:${s}px;height:${s}px;background:${h}"></span>`;
+
+function bojeDone(title,sk,again,msg,n){const w=screen(title,modBoje,CC);SFX.win();confetti(140);addStar(n);stat(sk,true);
+  const c=el('div','card');c.appendChild(el('div','emo','🎨'));c.appendChild(el('div','word','Bravo, Leona!'));c.appendChild(el('p','sub',msg+` Dobila si ${n} ⭐`));
+  const r=el('div','row');r.appendChild(button('btn','Još jednom',()=>{SFX.tap();again();}));r.appendChild(button('btn soft','Natrag',()=>modBoje()));c.appendChild(r);w.appendChild(c);say('Bravo Leona! '+msg);}
+/* ---------- Što će nastati? ---------- */
+function stoNastaje(){const easy=['crvena+žuta','plava+žuta','crvena+plava','bijela+crvena','bijela+crna','bijela+plava','crna+plava','plava+zelena','zelena+žuta'];
+  const pairs=Object.keys(MIX2).filter(k=>k.split('+').length===2&&(LVL||easy.includes(k)));let last=null;
+  const results=[...new Set(Object.values(MIX2))].filter(r=>namedHex(r));
+  quiz({title:'Što će nastati?',stat:'Što će nastati',back:modBoje,color:CC,rounds:6,make:()=>{let a;do{a=pick(pairs);}while(a===last);last=a;const [x,y]=a.split('+');const r=MIX2[a];
+    const ex=el('div','mxq',`${blobC(PIG[x].h,84)}<b>+</b>${blobC(PIG[y].h,84)}<b>=</b><span class="mxb q">?</span>`);
+    const wrong=shuffle(results.filter(c=>c!==r&&c!==x&&c!==y)).slice(0,LVL?3:2);const op=shuffle([r,...wrong]);
+    return{text:`${cap(x)} i ${y}. Što će nastati?`,speak:`Kad pomiješamo ${PIGA[x]||accC(x)} i ${PIGA[y]||accC(y)}, koja boja nastaje?`,extra:ex,answer:r,cols:2,
+      after:`${cap(x)} i ${y} daju ${accC(r)}.`,
+      options:op.map(c=>({v:c,cls:'mx',html:`${blobC(namedHex(c),64)}<span class="lb">${c}</span>`,label:c,say:c}))};}});}
+
+/* ---------- Svjetlije – tamnije ---------- */
+function svjetlije(){const bases=['crvena','plava','zelena','ljubičasta','narančasta'];const b=pick(bases);const n=LVL?5:4;
+  const all=[{[b]:1,bijela:4},{[b]:2,bijela:1},{[b]:1},{[b]:2,crna:1},{[b]:1,crna:2}];const steps=(n===5?all:[all[0],all[2],all[3],all[4]]).map(d=>mixRGB(d));
+  const w=screen('Svjetlije – tamnije',modBoje,CC);w.appendChild(el('p','hello','Složi od najsvjetlije do najtamnije!'));
+  const demo=el('div','mxq',`${blobC('#ffffff',46)}<small>svjetlije</small>${blobC(PIG[b].h,60)}<small>tamnije</small>${blobC('#222222',46)}`);w.appendChild(demo);
+  const row=el('div','zn-slots shade');steps.forEach((_,i)=>row.appendChild(el('div','zn-slot',`<b>${i+1}</b>`)));w.appendChild(row);
+  const g=el('div','zn-cards');w.appendChild(g);let i=0,miss=0;
+  shuffle(steps.map((h,k)=>[h,k])).forEach(([h,k])=>{const bt=button('zn-card shade',blobC(h,70),()=>{if(bt.disabled)return;
+    if(k===i){SFX.ok();bt.disabled=true;bt.classList.add('used');row.children[i].innerHTML=blobC(h,58);i++;
+      say(i===1?'Najsvjetlija!':i===steps.length?'Najtamnija!':'Da!');
+      if(i>=steps.length)setTimeout(()=>{bojeDone('Svjetlije – tamnije','Svjetlije tamnije',svjetlije,`Bijela boju čini svjetlijom, a crna tamnijom.`,miss<2?3:2);},900);}
+    else{miss++;SFX.no();bt.classList.add('shake');setTimeout(()=>bt.classList.remove('shake'),400);say(i===0?'Prvo traži najsvjetliju.':'Ne još. Traži malo tamniju.');}},'nijansa');g.appendChild(bt);});
+  say(`Kad ${PIGA[b]} pomiješamo s bijelom, postaje svjetlija. S crnom postaje tamnija. Složi nijanse od najsvjetlije do najtamnije!`,{prompt:true});}
+
+/* ---------- Recept za boju ---------- */
+const RECEPTI=[['narančasta',{žuta:2,crvena:1}],['zelena',{žuta:2,plava:1}],['ljubičasta',{crvena:1,plava:1}],['roza',{bijela:3,crvena:1}],['svjetloplava',{bijela:2,plava:1}],
+  ['siva',{bijela:2,crna:1}],['tirkizna',{zelena:1,plava:1}],['žutozelena',{žuta:1,zelena:1}],['tamnozelena',{zelena:2,crna:1}],['crvenonarančasta',{crvena:2,žuta:1}],
+  ['smeđa',{crvena:1,žuta:1,plava:1}],['lila',{bijela:2,ljubičasta:1}],['boja breskve',{bijela:2,narančasta:1}],['boja maline',{crvena:1,ljubičasta:1}],['tamnoplava',{plava:3,crna:1}]];
+function recept(){let round=0,miss=0;const N=5;const pool=shuffle(RECEPTI.filter(([,d])=>LVL||Object.values(d).reduce((a,b)=>a+b,0)<=3));
+  function next(){if(round>=N)return bojeDone('Recept za boju','Recept za boju',recept,'Točno si brojala kapi kao pravi slikar!',miss<3?3:2);
+    const [nm,rec]=pool[round%pool.length];const w=screen('Recept za boju',modBoje,CC);
+    const dots=el('div','dots');for(let k=0;k<N;k++)dots.appendChild(el('i',k<round?'on':''));w.appendChild(dots);
+    const txt=`Napravi ${accC(nm)}: `+Object.entries(rec).map(([c,n])=>`${KAPW[n]} ${colGen(c)}`).join(' i ')+'.';
+    const card=el('div','rcp',`<div class="rcp-t">${blobC(mixRGB(rec),56)}<b>${nm}</b></div><div class="rcp-l">${Object.entries(rec).map(([c,n])=>`<span>${Array(n).fill(`<i style="background:${PIG[c].h}"></i>`).join('')}</span>`).join('<b>+</b>')}</div>`);
+    w.appendChild(card);const pots=el('div','pots many');const bowl=el('div','bowl drops');const cnt=el('div','dropcnt');const d={};let busy=false;
+    const upd=()=>{cnt.innerHTML=BASE8.filter(n=>d[n]).map(n=>`<span><i style="background:${PIG[n].h}"></i>× ${d[n]}</span>`).join('');bowl.style.background=mixRGB(d)||'#fff';};
+    const reset=()=>{Object.keys(d).forEach(k=>delete d[k]);upd();};
+    BASE8.filter(c=>LVL||rec[c]||['crvena','žuta','plava','bijela','crna'].includes(c)).forEach(c=>pots.appendChild(potBtn(c,()=>{if(busy)return;d[c]=(d[c]||0)+1;SFX.pop();
+      const k=el('span','drop');k.style.background=PIG[c].h;bowl.appendChild(k);setTimeout(()=>k.remove(),600);upd();
+      if(!rec[c]||d[c]>rec[c]){miss++;busy=true;SFX.no();say(rec[c]?`Previše ${colGen(c)}! Treba ${KAPW[rec[c]]}. Prolijemo i probamo opet.`:`U receptu nema ${colGen(c)}. Prolijemo i probamo opet.`);
+        setTimeout(()=>{reset();busy=false;},1800);return;}
+      if(Object.entries(rec).every(([x,n])=>d[x]===n)){busy=true;SFX.ok();confetti(40);say(`Bravo! Dobila si ${accC(nm)}.`);round++;setTimeout(next,1800);}})));
+    const r=el('div','row');r.appendChild(button('btn soft','🔊 Recept',()=>say(txt),'Ponovi recept'));r.appendChild(button('btn soft','🫗 Prolij',()=>{if(!busy){reset();SFX.tap();}},'Prolij'));
+    w.appendChild(pots);w.appendChild(bowl);w.appendChild(cnt);w.appendChild(r);say(txt,{prompt:true});}
+  next();}
+
+/* ---------- miješanje u bojanci ---------- */
+let MYCOL=load('myCols',[]);
+const curHex=()=>curCol<PAL.length?PAL[curCol]:(MYCOL[curCol-PAL.length]||PAL[0]);
+function mixPopup(onDone){const ov=el('div','mxpop');const c=el('div','mxcard');ov.appendChild(c);document.body.appendChild(ov);const d={};let total=0;
+  c.appendChild(el('div','prompt','Pomiješaj svoju boju'));const pots=el('div','pots many');const bowl=el('div','bowl drops');const res=el('div','word','');res.style.textAlign='center';
+  const upd=()=>{const h=mixRGB(d);bowl.style.background=h||'#fff';res.textContent=h?colorName(h):'';ok.disabled=!h;};
+  BASE8.forEach(nm=>pots.appendChild(potBtn(nm,()=>{if(total>=15){SFX.no();say('Zdjela je puna!');return;}d[nm]=(d[nm]||0)+1;total++;SFX.pop();
+    const k=el('span','drop');k.style.background=PIG[nm].h;bowl.appendChild(k);setTimeout(()=>k.remove(),600);upd();})));
+  const r=el('div','row');const close=()=>ov.remove();
+  r.appendChild(button('btn soft','🫗 Prolij',()=>{Object.keys(d).forEach(k=>delete d[k]);total=0;SFX.tap();upd();},'Prolij'));
+  const ok=button('btn','🖌️ Uzmi ovu boju',()=>{const h=mixRGB(d);if(!h)return;MYCOL=[h,...MYCOL.filter(x=>x!==h)].slice(0,6);store('myCols',MYCOL);SFX.ok();say(`${cap(colorName(h))}. Sad možeš bojati svojom bojom!`);close();onDone(h);},'Uzmi ovu boju');
+  r.appendChild(ok);r.appendChild(button('btn soft','✖',()=>{SFX.tap();close();},'Zatvori'));
+  c.appendChild(pots);c.appendChild(bowl);c.appendChild(res);c.appendChild(r);upd();say('Dodaj kapi boja i napravi svoju boju.',{prompt:true});}
+
 const DUGA=[['crvena','#e53935'],['narančasta','#fb8c00'],['žuta','#fdd835'],['zelena','#43a047'],['plava','#1e88e5'],['modra','#3949ab'],['ljubičasta','#8e24aa']];
 function duga(){const w=screen('Duga',modBoje,CC);const drag=!!LVL;let next=0,miss=0,done=0;
   w.appendChild(el('p','hello',drag?'Odvuci svaku boju na njezin luk!':'Dodiruj boje redom, od vanjskog luka prema unutra.'));
@@ -1006,9 +1089,11 @@ function modBojanka(){const w=screen('Bojanka',home,CK);w.appendChild(el('p','he
   g.appendChild(button('',`<svg viewBox="0 0 400 400"><rect x="4" y="4" width="392" height="392" rx="20" fill="#fff" stroke="#2d2a3e" stroke-width="4"/><path d="M80 300 q60 -160 120 -40 t120 -120" fill="none" stroke="#e84393" stroke-width="16" stroke-linecap="round"/><circle cx="120" cy="110" r="30" fill="#fdd835"/></svg><span>Slobodno crtanje</span>`,()=>{SFX.tap();freeDraw();},'Slobodno crtanje'));
   w.appendChild(g);say('Odaberi sliku koju ćeš bojati.',{prompt:true});}
 let curCol=0;
-function palette(onPick){const p=el('div','pal');PAL.forEach((c,i)=>{const b=button(i===curCol?'sel':'','',()=>{curCol=i;[...p.children].forEach((x,k)=>x.classList.toggle('sel',k===i));SFX.tap();sayPolite(PALN[i]);onPick&&onPick(i);},PALN[i]);b.style.background=c;p.appendChild(b);});return p;}
+function palette(onPick){const p=el('div','pal');const draw=()=>{p.innerHTML='';const cols=PAL.concat(MYCOL);if(curCol>=cols.length)curCol=0;
+  cols.forEach((c,i)=>{const nm=i<PAL.length?PALN[i]:colorName(c);const b=button((i===curCol?'sel':'')+(i>=PAL.length?' mine':''),'',()=>{curCol=i;[...p.querySelectorAll('button[data-c]')].forEach((x,k)=>x.classList.toggle('sel',k===i));SFX.tap();sayPolite(nm);onPick&&onPick(i);},nm);b.dataset.c=i;b.style.background=c;p.appendChild(b);});
+  p.appendChild(button('mixbtn','🥣',()=>{SFX.tap();mixPopup(h=>{curCol=PAL.length;draw();});},'Pomiješaj svoju boju'));};draw();return p;}
 function colorPage(i){const w=screen('Bojanka: '+PAGES[i].n,modBojanka,CK);const cw=el('div','color-wrap');const box=el('div','svgbox',pageSvg(i));cw.appendChild(box);cw.appendChild(palette());w.appendChild(cw);
-  const svg=box.querySelector('svg');svg.addEventListener('click',e=>{const t=e.target.closest('.r');if(!t)return;const c=PAL[curCol];t.style.fill=c;(fills[i]=fills[i]||{})[t.dataset.i]=c;store('fills',fills);SFX.pop();
+  const svg=box.querySelector('svg');svg.addEventListener('click',e=>{const t=e.target.closest('.r');if(!t)return;const c=curHex();t.style.fill=c;(fills[i]=fills[i]||{})[t.dataset.i]=c;store('fills',fills);SFX.pop();
     const all=[...svg.querySelectorAll('.r')];if(!w.dataset.done&&all.every(x=>x.style.fill)){w.dataset.done=1;addStar(3);stat('Bojanka',true);confetti(120);SFX.win();sayPolite('Prekrasno! Obojila si cijelu sliku. Dobila si tri zvjezdice!');}});
   const r=el('div','row');r.appendChild(button('btn soft','🧽 Obriši sve',()=>{fills[i]={};store('fills',fills);colorPage(i);}));r.appendChild(button('btn','✔ Gotovo',()=>{confetti(80);SFX.win();sayThen('Prekrasna slika, Leona!',modBojanka,600);}));w.appendChild(r);
   say(`Odaberi boju, pa dodirni dio slike.`,{prompt:true});}
@@ -1017,7 +1102,7 @@ function freeDraw(){const w=screen('Slobodno crtanje',modBojanka,CK);const cw=el
   r.appendChild(sizes);r.appendChild(button('btn soft','🧽 Obriši',()=>{ctx.fillStyle='#fff';ctx.fillRect(0,0,S,S);}));w.appendChild(r);
   let S,ctx,dn=false,last;requestAnimationFrame(()=>{S=Math.round(cv.getBoundingClientRect().width*Math.min(2,devicePixelRatio||1));cv.width=cv.height=S;ctx=cv.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,S,S);});
   const pt=e=>{const q=cv.getBoundingClientRect();return[(e.clientX-q.left)/q.width*S,(e.clientY-q.top)/q.height*S];};
-  const ln=(a,b)=>{ctx.strokeStyle=PAL[curCol];ctx.lineWidth=S*size;ctx.lineCap='round';ctx.lineJoin='round';ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();};
+  const ln=(a,b)=>{ctx.strokeStyle=curHex();ctx.lineWidth=S*size;ctx.lineCap='round';ctx.lineJoin='round';ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();};
   cv.addEventListener('pointerdown',e=>{dn=true;last=pt(e);ln(last,last);try{cv.setPointerCapture(e.pointerId);}catch(_){}});cv.addEventListener('pointermove',e=>{if(!dn)return;const p=pt(e);ln(last,p);last=p;});
   ['pointerup','pointercancel'].forEach(t=>cv.addEventListener(t,()=>dn=false));say('Crtaj što god želiš!',{prompt:true});}
 
@@ -1703,7 +1788,7 @@ function modVrt(kind='vrt'){const S0=SHOPS[kind];const data=load('vrt',{vrt:[],s
 /* ================= MEDALJE I NALJEPNICE ================= */
 const AREAS=[['Slova','🔤',['Pronađi slovo','Prvo slovo']],['Čitanje','📗',['Čitanje']],['Pisanje','✏️',['Pisanje'],[1,10,30]],['Brojke','🔢',['Pronađi broj','Što je više?','Brojke']],
   ['Računanje','➕',['Prebroji','Zbrajanje','Oduzimanje','Računanje']],['Novac i sat','💶',['Novac','Sat']],['Oblici','🔺',['Pronađi oblik']],['Logika','🧩',['Logika']],['Kviz','❓',['Kviz']],
-  ['Boje','🎨',['Pronađi boju','Napravi ovu boju','Duga']],['Životinje','🐄',['Tko to kaže?','Pronađi životinju']],['Svijet oko nas','🌍',['Svijet']],['Osjećaji','😊',['Osjećaji']],['Slikovnice','📖',['Slikovnice'],[3,10,25]],
+  ['Boje','🎨',['Pronađi boju','Napravi ovu boju','Duga','Što će nastati','Svjetlije tamnije','Recept za boju']],['Životinje','🐄',['Tko to kaže?','Pronađi životinju']],['Svijet oko nas','🌍',['Svijet']],['Osjećaji','😊',['Osjećaji']],['Slikovnice','📖',['Slikovnice'],[3,10,25]],
   ['Moja Hrvatska','🛡️',['Hrvatska']],['Linije i točkice','〰️',['Linije'],[3,12,30]],['Bojanka','🖍️',['Bojanka'],[1,5,12]],['Glazba','🎹',['Glazba'],[1,3,6]],['Brojalice','👆',['Brojalice'],[1,5,15]],
   ['Engleski','🇬🇧',['Engleski']],['Kalendar','📅',['Kalendar']],['Promet','🚦',['Promet','Svijet: promet']],['Mali programer','🤖',['Programer'],[1,6,15]],['Usporedi','⚖️',['Usporedi']],
   ['Tijelo i zdravlje','🦷',['Zdravlje']],['Zanimanja','👩‍🚒',['Zanimanja']],['Razvrstaj otpad','♻️',['Otpad']],['Svemir','🪐',['Svemir']],['Advent','🎄',['Advent'],[1,10,24]],['Snimi glas','🎤',['Snimi glas'],[1,5,15]],['Rođendan','🎂',['__bday'],[1,2,3]],
