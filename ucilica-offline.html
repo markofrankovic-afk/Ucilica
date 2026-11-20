@@ -2611,53 +2611,58 @@ const DINOS=[
 const DMALI=['trex','tri','stego','brahi','velo','ptera'];
 function dinoPool(){return LVL?DINOS:DINOS.filter(d=>DMALI.includes(d.id));}
 const DG=id=>DINOS.find(d=>d.id===id);
-function dinoSVG(d,sil){const SIL='#3b3552',OL=sil?SIL:'#3a2f4a';
-  const C=c=>sil?SIL:c;const col=C(d.col),bel=C(d.bel),dk=sil?SIL:shade(d.col,-.22);
-  const st=(path,w,c)=>`<path d="${path}" fill="none" stroke="${OL}" stroke-width="${w+5}" stroke-linecap="round" stroke-linejoin="round"/><path d="${path}" fill="none" stroke="${c}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`;
-  const E=(cx,cy,rx,ry,c,extra='')=>`<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="${c}" stroke="${OL}" stroke-width="3" ${extra}/>`;
-  const P=(p,c,w=3)=>`<path d="${p}" fill="${c}" stroke="${OL}" stroke-width="${w}" stroke-linejoin="round"/>`;
-  const eye=(x,y,r=6)=>sil?'':`<ellipse cx="${x}" cy="${y}" rx="${r}" ry="${r*1.15}" fill="#fff" stroke="${OL}" stroke-width="2"/><ellipse cx="${x+1.5}" cy="${y+1}" rx="${r*.55}" ry="${r*.7}" fill="#2a2038"/><circle cx="${x+3}" cy="${y-1.5}" r="${r*.25}" fill="#fff"/>`;
-  const smile=(x,y,w=10)=>sil?'':`<path d="M${x-w/2} ${y} Q${x} ${y+w*.45} ${x+w/2} ${y}" fill="none" stroke="${OL}" stroke-width="2.5" stroke-linecap="round"/>`;
-  const blush=(x,y)=>sil?'':`<ellipse cx="${x}" cy="${y}" rx="5" ry="3" fill="#ff8fa8" opacity=".55"/>`;
-  const teeth=(x0,x1,y)=>{if(sil)return'';let s='';for(let x=x0;x<x1;x+=6)s+=`<path d="M${x} ${y} l3 5 l3 -5z" fill="#fff" stroke="${OL}" stroke-width="1.2"/>`;return s;};
-  const leg=(x1,y1,x2,y2,w,c=col)=>st(`M${x1} ${y1} L${x2} ${y2}`,w,c)+E(x2+3,y2+2,w*.6,w*.32,c);
-  const spots=(arr)=>sil?'':arr.map(([x,y,r])=>`<ellipse cx="${x}" cy="${y}" rx="${r}" ry="${r*.75}" fill="${dk}" opacity=".45"/>`).join('');
+let DSVGN=0;
+function dinoSVG(d,sil){const SIL='#3b3552',OL=sil?SIL:'#3d2f52';const gid='dg'+(++DSVGN);
+  const C=c=>sil?SIL:c;const col=sil?SIL:`url(#${gid})`,bel=sil?SIL:`url(#${gid}b)`,dk=sil?SIL:`url(#${gid}d)`,dkc=shade(d.col,-.25);
+  const defs=sil?'':`<defs><linearGradient id="${gid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${shade(d.col,.32)}"/><stop offset=".5" stop-color="${d.col}"/><stop offset="1" stop-color="${shade(d.col,-.14)}"/></linearGradient><linearGradient id="${gid}d" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${shade(d.col,-.08)}"/><stop offset="1" stop-color="${shade(d.col,-.3)}"/></linearGradient><linearGradient id="${gid}b" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${shade(d.bel,.4)}"/><stop offset="1" stop-color="${d.bel}"/></linearGradient><radialGradient id="${gid}h" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs>`;
+  const st=(path,w,c)=>`<path d="${path}" fill="none" stroke="${OL}" stroke-width="${w+4.4}" stroke-linecap="round" stroke-linejoin="round"/><path d="${path}" fill="none" stroke="${c}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`;
+  const E=(cx,cy,rx,ry,c,extra='')=>`<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="${c}" ${extra||`stroke="${OL}" stroke-width="2.6"`}/>`;
+  const P=(p,c,w=2.6)=>`<path d="${p}" fill="${c}" stroke="${OL}" stroke-width="${w}" stroke-linejoin="round" stroke-linecap="round"/>`;
+  const hl=(cx,cy,rx,ry)=>sil?'':`<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="url(#${gid}h)"/>`;
+  const eye=(x,y,r=6)=>{if(sil)return'';r*=1.18;return `<ellipse cx="${x}" cy="${y}" rx="${r}" ry="${r*1.18}" fill="#fff" stroke="${OL}" stroke-width="2"/><ellipse cx="${x+1.2}" cy="${y+1}" rx="${r*.62}" ry="${r*.78}" fill="#2a2038"/><ellipse cx="${x+1.2}" cy="${y+2.5}" rx="${r*.4}" ry="${r*.35}" fill="#5a4a7a"/><circle cx="${x+3}" cy="${y-2}" r="${r*.3}" fill="#fff"/><circle cx="${x-.5}" cy="${y+3}" r="${r*.14}" fill="#fff"/><path d="M${x-r*.9} ${y-r*1.15} Q${x} ${y-r*1.6} ${x+r*.9} ${y-r*1.2}" fill="none" stroke="${OL}" stroke-width="2" stroke-linecap="round"/>`;};
+  const smile=(x,y,w=10)=>sil?'':`<path d="M${x-w/2} ${y} Q${x} ${y+w*.5} ${x+w/2} ${y}" fill="none" stroke="${OL}" stroke-width="2.2" stroke-linecap="round"/>`;
+  const blush=(x,y)=>sil?'':`<ellipse cx="${x}" cy="${y}" rx="5.5" ry="3.2" fill="#ff7f9e" opacity=".5"/>`;
+  const teeth=(x0,x1,y)=>{if(sil)return'';let s='';for(let x=x0;x<x1;x+=6)s+=`<path d="M${x} ${y} l3 5 l3 -5z" fill="#fff" stroke="${OL}" stroke-width="1.1"/>`;return s;};
+  const leg=(x1,y1,x2,y2,w,c=col)=>{const kx=x1+(x2-x1)*.35,ky=y1+(y2-y1)*.35;
+    return st(`M${kx} ${ky} L${x2} ${y2-2}`,w*.92,c)+`<ellipse cx="${x1}" cy="${y1}" rx="${w*.95}" ry="${w*1.15}" fill="${c}"/>`+P(`M${x2-w*.55} ${y2+4} Q${x2-w*.6} ${y2-w*.45} ${x2} ${y2-w*.4} Q${x2+w*.75} ${y2-w*.4} ${x2+w*.8} ${y2+4} Z`,c,2.4)
+      +(sil?'':[0,1,2].map(k=>`<ellipse cx="${x2-w*.25+k*w*.38}" cy="${y2+2.5}" rx="${w*.13}" ry="${w*.1}" fill="#fff8ec" stroke="${OL}" stroke-width="1"/>`).join(''));};
+  const spots=(arr)=>sil?'':arr.map(([x,y,r])=>`<ellipse cx="${x}" cy="${y}" rx="${r}" ry="${r*.75}" fill="${dkc}" opacity=".35"/>`).join('');
   let s='';
   switch(d.id){
-  case 'trex':s+=P('M70 74 Q35 60 6 66 Q34 80 72 100 Z',col)+leg(92,100,86,146,16,dk)+E(100,82,40,30,col)+E(104,86,22,13,bel,'stroke-width="0" opacity=".85"')+st('M122 66 Q140 52 150 46',22,col)
+  case 'trex':s+=P('M70 74 Q35 60 6 66 Q34 80 72 100 Z',col)+leg(92,100,86,146,16,dk)+E(100,82,40,30,col)+hl(94,68,22,10)+E(104,86,22,13,bel,'stroke-width="0" opacity=".6"')+st('M122 66 Q140 52 150 46',22,col)
     +E(160,44,30,20,col)+P('M150 52 Q175 70 192 54 Q188 64 170 66 Q155 64 150 52 Z',col,2.5)+teeth(170,190,54)+leg(110,100,118,146,17)+st('M128 88 Q138 94 142 100',6,col)+eye(166,36)+blush(176,46)+spots([[90,70,5],[78,82,4],[105,66,4]]);break;
-  case 'tri':s+=P('M58 92 Q30 92 10 100 Q34 108 60 112 Z',col)+leg(70,112,66,146,15,dk)+leg(128,112,126,146,15,dk)+E(98,98,50,32,col)+E(100,104,29,11,bel,'stroke-width="0" opacity=".85"')
+  case 'tri':s+=P('M58 92 Q30 92 10 100 Q34 108 60 112 Z',col)+leg(70,112,66,146,15,dk)+leg(128,112,126,146,15,dk)+E(98,98,50,32,col)+hl(92,84,27,11)+E(100,104,29,11,bel,'stroke-width="0" opacity=".6"')
     +E(150,82,24,30,C('#f7c56b'))+(sil?'':`<path d="M134 64 Q150 52 166 64" fill="none" stroke="${shade('#f7c56b',-.25)}" stroke-width="3"/>`)+P('M145 62 L150 34 L156 60 Z',C('#fff5d6'),2.5)+P('M160 66 L170 40 L170 68 Z',C('#fff5d6'),2.5)
     +E(168,96,24,18,col)+P('M186 88 L198 76 L192 94 Z',C('#fff5d6'),2.5)+leg(82,114,80,146,15)+leg(118,114,120,146,15)+eye(170,88,5.5)+smile(178,104,9)+blush(160,100)+spots([[84,84,5],[100,78,4],[115,88,5]]);break;
   case 'stego':{s+=P('M56 96 Q30 90 8 84 Q30 104 58 110 Z',col)+P('M12 84 L4 70 L18 82 Z M18 88 L12 74 L24 86 Z',C('#fff5d6'),2);
     const pl=C('#f2786a');[[62,62,14],[80,52,16],[100,48,17],[120,52,16],[138,62,13]].forEach(([x,y,h])=>{s+=P(`M${x-11} ${y+22} L${x} ${y-h+10} L${x+11} ${y+22} Z`,pl,2.5);});
-    s+=leg(72,112,68,146,14,dk)+leg(124,112,124,146,14,dk)+E(100,96,50,28,col)+E(102,102,29,10,bel,'stroke-width="0" opacity=".85"')+st('M140 100 Q156 104 164 108',14,col)+E(172,110,16,11,col)+leg(84,114,82,146,14)+leg(116,114,118,146,14)+eye(174,105,4.5)+smile(180,115,7)+spots([[88,90,5],[108,84,4]]);break;}
-  case 'brahi':s+=P('M60 106 Q30 104 6 112 Q30 120 62 120 Z',col)+leg(72,118,70,148,15,dk)+leg(118,112,122,148,16,dk)+E(92,106,44,28,col)+E(94,110,26,8,bel,'stroke-width="0" opacity=".85"')+st('M118 92 Q140 60 150 26',18,col)
+    s+=leg(72,112,68,146,14,dk)+leg(124,112,124,146,14,dk)+E(100,96,50,28,col)+hl(94,83,27,9)+E(102,102,29,10,bel,'stroke-width="0" opacity=".6"')+st('M140 100 Q156 104 164 108',14,col)+E(172,110,16,11,col)+leg(84,114,82,146,14)+leg(116,114,118,146,14)+eye(174,105,4.5)+smile(180,115,7)+spots([[88,90,5],[108,84,4]]);break;}
+  case 'brahi':s+=P('M60 106 Q30 104 6 112 Q30 120 62 120 Z',col)+leg(72,118,70,148,15,dk)+leg(118,112,122,148,16,dk)+E(92,106,44,28,col)+hl(86,93,24,9)+E(94,110,26,8,bel,'stroke-width="0" opacity=".6"')+st('M118 92 Q140 60 150 26',18,col)
     +E(160,22,18,12,col)+leg(84,120,84,148,15)+leg(110,116,112,148,16)+eye(162,17,4.5)+smile(170,26,7)+blush(160,28)+spots([[80,96,6],[98,90,5],[112,100,4],[140,62,3.5],[146,44,3]]);break;
   case 'velo':s+=P('M80 78 Q40 70 6 70 Q40 84 82 92 Z',col)+(sil?'':`<path d="M14 71 l8 -6 M24 72 l8 -7 M34 73 l8 -7" stroke="${dk}" stroke-width="3" stroke-linecap="round"/>`)
-    +leg(98,92,92,124,9,dk)+st('M92 124 L88 146',8,dk)+E(102,82,30,18,col)+E(104,82,15,7,bel,'stroke-width="0" opacity=".85"')+st('M124 74 Q134 66 140 62',12,col)+E(150,58,20,11,col)+teeth(156,168,64)
+    +leg(98,92,92,124,9,dk)+st('M92 124 L88 146',8,dk)+E(102,82,30,18,col)+hl(96,74,16,6)+E(104,82,15,7,bel,'stroke-width="0" opacity=".6"')+st('M124 74 Q134 66 140 62',12,col)+E(150,58,20,11,col)+teeth(156,168,64)
     +leg(110,94,116,124,9)+st('M116 124 L112 146',8,col)+P('M118 88 Q130 92 132 100 L124 96 Z',C('#fff5d6'),2)+(sil?'':`<path d="M96 70 l-4 -8 M104 68 l0 -9 M112 70 l4 -8" stroke="${dk}" stroke-width="3" stroke-linecap="round"/>`)+eye(152,53,4.5)+spots([[92,78,3],[100,74,3],[108,78,3]]);break;
   case 'ptera':s+=P('M110 74 L20 40 Q40 70 30 96 Q70 84 110 90 Z',C(shade(d.col,.15)))+P('M114 74 L204 40 Q184 70 194 96 Q154 84 114 90 Z',C(shade(d.col,.15)))
     +(sil?'':`<path d="M110 76 L40 52 M110 80 L36 80 M114 76 L184 52 M114 80 L188 80" stroke="${dk}" stroke-width="2" opacity=".5"/>`)
-    +E(112,82,16,12,col)+E(112,60,14,12,col)+P('M104 52 L80 38 L104 46 Z',col,2.5)+P('M120 62 L160 70 L120 70 Z',C('#f7c56b'),2.5)+st('M106 94 L102 108',5,dk)+st('M118 94 L122 108',5,dk)+eye(116,56,4.5)+blush(122,64);break;
-  case 'diplo':s+=P('M74 100 Q40 92 4 82 Q38 108 76 114 Z',col)+leg(86,114,84,146,14,dk)+leg(134,112,136,146,14,dk)+E(110,102,44,24,col)+E(112,106,26,7,bel,'stroke-width="0" opacity=".85"')+st('M146 92 Q176 74 192 58',14,col)
+    +E(112,82,16,12,col)+hl(106,77,8,4)+E(112,60,14,12,col)+P('M104 52 L80 38 L104 46 Z',col,2.5)+P('M120 62 L160 70 L120 70 Z',C('#f7c56b'),2.5)+st('M106 94 L102 108',5,dk)+st('M118 94 L122 108',5,dk)+eye(116,56,4.5)+blush(122,64);break;
+  case 'diplo':s+=P('M74 100 Q40 92 4 82 Q38 108 76 114 Z',col)+leg(86,114,84,146,14,dk)+leg(134,112,136,146,14,dk)+E(110,102,44,24,col)+hl(104,91,24,8)+E(112,106,26,7,bel,'stroke-width="0" opacity=".6"')+st('M146 92 Q176 74 192 58',14,col)
     +E(200,54,14,9,col)+leg(98,116,98,146,14)+leg(124,114,126,146,14)+eye(202,50,4)+smile(208,58,6)+spots([[100,94,5],[118,90,4],[130,100,4],[166,78,3]]);break;
-  case 'anki':s+=st('M60 112 Q36 112 22 108',12,col)+E(16,106,12,10,C('#d9b98f'))+leg(80,120,78,146,15,dk)+leg(132,120,134,146,15,dk)+E(105,110,56,24,col)+E(108,115,34,6,bel,'stroke-width="0" opacity=".85"')
+  case 'anki':s+=st('M60 112 Q36 112 22 108',12,col)+E(16,106,12,10,C('#d9b98f'))+leg(80,120,78,146,15,dk)+leg(132,120,134,146,15,dk)+E(105,110,56,24,col)+hl(99,99,30,8)+E(108,115,34,6,bel,'stroke-width="0" opacity=".6"')
     +[[70,100],[88,94],[106,92],[124,94],[140,100],[80,110],[98,106],[116,106],[132,110]].map(([x,y])=>E(x,y,6,4,C('#e8d0a8'))).join('')
     +E(170,114,18,13,col)+P('M160 104 L156 96 L166 102 Z M176 104 L182 96 L180 106 Z',C('#e8d0a8'),2)+leg(92,122,92,146,15)+leg(120,122,122,146,15)+eye(174,110,4.5)+smile(180,120,7);break;
-  case 'para':s+=P('M64 86 Q36 84 8 94 Q36 104 66 104 Z',col)+leg(90,104,84,146,15,dk)+E(100,88,40,28,col)+E(102,92,22,10,bel,'stroke-width="0" opacity=".85"')+st('M124 74 Q140 62 150 58',16,col)
+  case 'para':s+=P('M64 86 Q36 84 8 94 Q36 104 66 104 Z',col)+leg(90,104,84,146,15,dk)+E(100,88,40,28,col)+hl(94,75,22,9)+E(102,92,22,10,bel,'stroke-width="0" opacity=".6"')+st('M124 74 Q140 62 150 58',16,col)
     +st('M156 50 Q140 36 118 30',9,C('#e8664a'))+E(160,56,20,13,col)+P('M174 58 Q190 60 188 66 Q178 68 170 64 Z',col,2.5)+leg(110,104,116,146,15)+st('M126 92 L136 106',6,col)+eye(160,51,4.5)+smile(176,64,6)+blush(166,62)
     +(sil?'':`<path d="M84 66 l6 20 M100 62 l2 22 M116 66 l-2 20" stroke="${dk}" stroke-width="4" opacity=".4" stroke-linecap="round"/>`);break;
   case 'spino':s+=P('M64 94 Q34 90 6 96 Q34 106 66 110 Z',col)+P('M64 84 Q70 26 100 28 Q130 26 136 84 Z',C('#e46a6a'))
     +(sil?'':[78,90,100,110,122].map(x=>`<path d="M${x} 82 L${x+(x-100)*.15} ${40+Math.abs(x-100)*.6}" stroke="${shade('#e46a6a',-.25)}" stroke-width="2.5"/>`).join(''))
-    +leg(88,106,84,146,15,dk)+E(100,92,42,24,col)+E(102,96,24,8,bel,'stroke-width="0" opacity=".85"')+st('M128 82 Q140 76 148 74',15,col)+E(162,72,26,11,col)+P('M176 68 L198 72 L178 80 Z',col,2.5)+teeth(170,194,76)
+    +leg(88,106,84,146,15,dk)+E(100,92,42,24,col)+hl(94,81,23,8)+E(102,96,24,8,bel,'stroke-width="0" opacity=".6"')+st('M128 82 Q140 76 148 74',15,col)+E(162,72,26,11,col)+P('M176 68 L198 72 L178 80 Z',col,2.5)+teeth(170,194,76)
     +leg(110,108,116,146,15)+st('M128 92 L136 104',6,col)+eye(158,66,4.5)+spots([[86,90,4],[104,86,4]]);break;
-  case 'igua':s+=P('M66 88 Q36 86 8 98 Q36 106 68 106 Z',col)+leg(90,106,84,146,15,dk)+E(100,90,40,28,col)+E(102,94,22,10,bel,'stroke-width="0" opacity=".85"')+st('M124 74 Q138 64 146 60',16,col)
+  case 'igua':s+=P('M66 88 Q36 86 8 98 Q36 106 68 106 Z',col)+leg(90,106,84,146,15,dk)+E(100,90,40,28,col)+hl(94,77,22,9)+E(102,94,22,10,bel,'stroke-width="0" opacity=".6"')+st('M124 74 Q138 64 146 60',16,col)
     +E(158,56,20,14,col)+P('M172 56 Q188 60 186 66 Q176 70 168 64 Z',col,2.5)+leg(110,106,116,146,15)+st('M126 92 L138 108',8,col)+P('M136 104 L148 96 L142 108 Z',C('#fff5d6'),2)+eye(160,50,4.5)+smile(176,64,6)+blush(164,62)+spots([[88,80,5],[104,76,4],[112,88,4]]);break;
-  case 'pahi':s+=P('M70 92 Q40 88 10 96 Q40 106 72 108 Z',col)+leg(92,108,86,146,14,dk)+E(102,92,36,26,col)+E(104,96,20,9,bel,'stroke-width="0" opacity=".85"')+st('M124 78 Q134 70 140 66',15,col)
+  case 'pahi':s+=P('M70 92 Q40 88 10 96 Q40 106 72 108 Z',col)+leg(92,108,86,146,14,dk)+E(102,92,36,26,col)+hl(96,80,19,9)+E(104,96,20,9,bel,'stroke-width="0" opacity=".6"')+st('M124 78 Q134 70 140 66',15,col)
     +E(152,64,20,16,col)+P('M134 60 Q136 30 156 32 Q174 34 170 60 Z',C('#f4c38a'))+(sil?'':[[138,52],[148,40],[160,40],[168,50]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="3" fill="${shade('#f4c38a',-.25)}"/>`).join(''))
     +leg(112,108,118,146,14)+st('M126 94 L134 106',6,col)+eye(158,64,4.5)+smile(166,74,6)+blush(162,72);break;}
-  return `<svg viewBox="0 0 215 155" class="dsvg" xmlns="http://www.w3.org/2000/svg">${sil?'':'<ellipse cx="105" cy="149" rx="85" ry="5" fill="#000" opacity=".08"/>'}${s}</svg>`;}
+  return `<svg viewBox="0 0 215 155" class="dsvg" xmlns="http://www.w3.org/2000/svg">${defs}${sil?'':'<ellipse cx="105" cy="149" rx="85" ry="5" fill="#000" opacity=".08"/>'}${s}</svg>`;}
 function shade(hex,k){const n=parseInt(hex.slice(1),16);let r=n>>16,g=(n>>8)&255,b=n&255;const f=v=>Math.max(0,Math.min(255,Math.round(k<0?v*(1+k):v+(255-v)*k)));return '#'+[f(r),f(g),f(b)].map(v=>v.toString(16).padStart(2,'0')).join('');}
 function roar(big=1){if(big){tone(160,60,.7,'sawtooth',.07);tone(240,80,.6,'square',.025,.04);}else tone(500,260,.25,'triangle',.06);}
 function dinoName(d){return d.say||d.n;}
