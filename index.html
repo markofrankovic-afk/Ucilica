@@ -2641,6 +2641,7 @@ function dinoSVG(d,sil){const SIL='#3b3552',OL=sil?SIL:'#3d2f52';const gid='dg'+
   const smile=(x,y,w=10)=>sil?'':`<path d="M${x-w/2} ${y} Q${x} ${y+w*.5} ${x+w/2} ${y}" fill="none" stroke="${OL}" stroke-width="2.2" stroke-linecap="round"/>`;
   const blush=(x,y)=>sil?'':`<ellipse cx="${x}" cy="${y}" rx="5.5" ry="3.2" fill="#ff7f9e" opacity=".5"/>`;
   const teeth=(x0,x1,y)=>{if(sil)return'';let s='';for(let x=x0;x<x1;x+=6)s+=`<path d="M${x} ${y} l3 5 l3 -5z" fill="#fff" stroke="${OL}" stroke-width="1.1"/>`;return s;};
+  const mouth=(x0,y0,cx,cy,x1,y1,t0,t1,n,line=1)=>{if(sil)return'';const q=t=>[(1-t)*(1-t)*x0+2*t*(1-t)*cx+t*t*x1,(1-t)*(1-t)*y0+2*t*(1-t)*cy+t*t*y1];let o=line?`<path d="M${x0} ${y0} Q${cx} ${cy} ${x1} ${y1}" fill="none" stroke="${OL}" stroke-width="2.4" stroke-linecap="round"/>`:'';for(let k=0;k<n;k++){const t=t0+(t1-t0)*(n>1?k/(n-1):.5);const[a,b]=q(t);o+=`<path d="M${(a-2.6).toFixed(1)} ${(b-.5).toFixed(1)} L${a.toFixed(1)} ${(b+5).toFixed(1)} L${(a+2.6).toFixed(1)} ${(b-.5).toFixed(1)} Z" fill="#fff" stroke="${OL}" stroke-width="1.1" stroke-linejoin="round"/>`;}return o;};
   const leg=(x1,y1,x2,y2,w,c=col)=>{const kx=x1+(x2-x1)*.35,ky=y1+(y2-y1)*.35;
     return st(`M${kx} ${ky} L${x2} ${y2-2}`,w*.92,c)+`<ellipse cx="${x1}" cy="${y1}" rx="${w*.95}" ry="${w*1.15}" fill="${c}"/>`+P(`M${x2-w*.55} ${y2+4} Q${x2-w*.6} ${y2-w*.45} ${x2} ${y2-w*.4} Q${x2+w*.75} ${y2-w*.4} ${x2+w*.8} ${y2+4} Z`,c,2.4)
       +(sil?'':[0,1,2].map(k=>`<ellipse cx="${x2-w*.25+k*w*.38}" cy="${y2+2.5}" rx="${w*.13}" ry="${w*.1}" fill="#fff8ec" stroke="${OL}" stroke-width="1"/>`).join(''));};
@@ -2648,7 +2649,7 @@ function dinoSVG(d,sil){const SIL='#3b3552',OL=sil?SIL:'#3d2f52';const gid='dg'+
   let s='';
   switch(d.id){
   case 'trex':s+=P('M70 74 Q35 60 6 66 Q34 80 72 100 Z',col)+leg(92,100,86,146,16,dk)+E(100,82,40,30,col)+hl(94,68,22,10)+E(104,86,22,13,bel,'stroke-width="0" opacity=".6"')+st('M122 66 Q140 52 150 46',22,col)
-    +E(160,44,30,20,col)+P('M150 52 Q175 70 192 54 Q188 64 170 66 Q155 64 150 52 Z',col,2.5)+teeth(170,190,54)+leg(110,100,118,146,17)+st('M128 88 Q138 94 142 100',6,col)+eye(166,36)+blush(176,46)+spots([[90,70,5],[78,82,4],[105,66,4]]);break;
+    +E(160,44,30,20,col)+P('M150 52 Q175 70 192 54 Q188 64 170 66 Q155 64 150 52 Z',col,2.5)+mouth(150,52,175,70,192,54,.42,.86,4,0)+leg(110,100,118,146,17)+st('M128 88 Q138 94 142 100',6,col)+eye(166,36)+blush(176,46)+spots([[90,70,5],[78,82,4],[105,66,4]]);break;
   case 'tri':s+=P('M58 92 Q30 92 10 100 Q34 108 60 112 Z',col)+leg(70,112,66,146,15,dk)+leg(128,112,126,146,15,dk)+E(98,98,50,32,col)+hl(92,84,27,11)+E(100,104,29,11,bel,'stroke-width="0" opacity=".6"')
     +E(150,82,24,30,C('#f7c56b'))+(sil?'':`<path d="M134 64 Q150 52 166 64" fill="none" stroke="${shade('#f7c56b',-.25)}" stroke-width="3"/>`)+P('M145 62 L150 34 L156 60 Z',C('#fff5d6'),2.5)+P('M160 66 L170 40 L170 68 Z',C('#fff5d6'),2.5)
     +E(168,96,24,18,col)+P('M186 88 L198 76 L192 94 Z',C('#fff5d6'),2.5)+leg(82,114,80,146,15)+leg(118,114,120,146,15)+eye(170,88,5.5)+smile(178,104,9)+blush(160,100)+spots([[84,84,5],[100,78,4],[115,88,5]]);break;
@@ -2658,7 +2659,7 @@ function dinoSVG(d,sil){const SIL='#3b3552',OL=sil?SIL:'#3d2f52';const gid='dg'+
   case 'brahi':s+=P('M60 106 Q30 104 6 112 Q30 120 62 120 Z',col)+leg(72,118,70,148,15,dk)+leg(118,112,122,148,16,dk)+E(92,106,44,28,col)+hl(86,93,24,9)+E(94,110,26,8,bel,'stroke-width="0" opacity=".6"')+st('M118 92 Q140 60 150 26',18,col)
     +E(160,22,18,12,col)+leg(84,120,84,148,15)+leg(110,116,112,148,16)+eye(162,17,4.5)+smile(170,26,7)+blush(160,28)+spots([[80,96,6],[98,90,5],[112,100,4],[140,62,3.5],[146,44,3]]);break;
   case 'velo':s+=P('M80 78 Q40 70 6 70 Q40 84 82 92 Z',col)+(sil?'':`<path d="M14 71 l8 -6 M24 72 l8 -7 M34 73 l8 -7" stroke="${dk}" stroke-width="3" stroke-linecap="round"/>`)
-    +leg(98,92,92,124,9,dk)+st('M92 124 L88 146',8,dk)+E(102,82,30,18,col)+hl(96,74,16,6)+E(104,82,15,7,bel,'stroke-width="0" opacity=".6"')+st('M124 74 Q134 66 140 62',12,col)+E(150,58,20,11,col)+teeth(156,168,64)
+    +leg(98,92,92,124,9,dk)+st('M92 124 L88 146',8,dk)+E(102,82,30,18,col)+hl(96,74,16,6)+E(104,82,15,7,bel,'stroke-width="0" opacity=".6"')+st('M124 74 Q134 66 140 62',12,col)+E(150,58,20,11,col)+mouth(142,62,156,68,169,59,.45,.85,3)
     +leg(110,94,116,124,9)+st('M116 124 L112 146',8,col)+P('M118 88 Q130 92 132 100 L124 96 Z',C('#fff5d6'),2)+(sil?'':`<path d="M96 70 l-4 -8 M104 68 l0 -9 M112 70 l4 -8" stroke="${dk}" stroke-width="3" stroke-linecap="round"/>`)+eye(152,53,4.5)+spots([[92,78,3],[100,74,3],[108,78,3]]);break;
   case 'ptera':s+=P('M110 74 L20 40 Q40 70 30 96 Q70 84 110 90 Z',C(shade(d.col,.15)))+P('M114 74 L204 40 Q184 70 194 96 Q154 84 114 90 Z',C(shade(d.col,.15)))
     +(sil?'':`<path d="M110 76 L40 52 M110 80 L36 80 M114 76 L184 52 M114 80 L188 80" stroke="${dk}" stroke-width="2" opacity=".5"/>`)
@@ -2673,7 +2674,7 @@ function dinoSVG(d,sil){const SIL='#3b3552',OL=sil?SIL:'#3d2f52';const gid='dg'+
     +(sil?'':`<path d="M84 66 l6 20 M100 62 l2 22 M116 66 l-2 20" stroke="${dk}" stroke-width="4" opacity=".4" stroke-linecap="round"/>`);break;
   case 'spino':s+=P('M64 94 Q34 90 6 96 Q34 106 66 110 Z',col)+P('M64 84 Q70 26 100 28 Q130 26 136 84 Z',C('#e46a6a'))
     +(sil?'':[78,90,100,110,122].map(x=>`<path d="M${x} 82 L${x+(x-100)*.15} ${40+Math.abs(x-100)*.6}" stroke="${shade('#e46a6a',-.25)}" stroke-width="2.5"/>`).join(''))
-    +leg(88,106,84,146,15,dk)+E(100,92,42,24,col)+hl(94,81,23,8)+E(102,96,24,8,bel,'stroke-width="0" opacity=".6"')+st('M128 82 Q140 76 148 74',15,col)+E(162,72,26,11,col)+P('M176 68 L198 72 L178 80 Z',col,2.5)+teeth(170,194,76)
+    +leg(88,106,84,146,15,dk)+E(100,92,42,24,col)+hl(94,81,23,8)+E(102,96,24,8,bel,'stroke-width="0" opacity=".6"')+st('M128 82 Q140 76 148 74',15,col)+E(162,72,26,11,col)+P('M176 68 L198 72 L178 80 Z',col,2.5)+mouth(148,76,170,82,194,73,.4,.85,4)
     +leg(110,108,116,146,15)+st('M128 92 L136 104',6,col)+eye(158,66,4.5)+spots([[86,90,4],[104,86,4]]);break;
   case 'igua':s+=P('M66 88 Q36 86 8 98 Q36 106 68 106 Z',col)+leg(90,106,84,146,15,dk)+E(100,90,40,28,col)+hl(94,77,22,9)+E(102,94,22,10,bel,'stroke-width="0" opacity=".6"')+st('M124 74 Q138 64 146 60',16,col)
     +E(158,56,20,14,col)+P('M172 56 Q188 60 186 66 Q176 70 168 64 Z',col,2.5)+leg(110,106,116,146,15)+st('M126 92 L138 108',8,col)+P('M136 104 L148 96 L142 108 Z',C('#fff5d6'),2)+eye(160,50,4.5)+smile(176,64,6)+blush(164,62)+spots([[88,80,5],[104,76,4],[112,88,4]]);break;
