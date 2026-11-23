@@ -9,7 +9,7 @@
 /* Layout: one-screen app, sticky top bar, big touch tiles; every module gets its own crayon colour */
 :root{
   --paper:#f7f6fb; --card:#ffffff; --ink:#2d2a3e; --muted:#6f6a86; --line:#e4e1ee; --ok:#22a06b; --bad:#e5484d; --star:#f5b301;
-  --c-znam:#ff8a3d; --c-slova:#ff7a59; --c-brojke:#3d7bfd; --c-racun:#16a37f; --c-oblici:#f0a500; --c-boje:#e84393; --c-zivotinje:#9b6b4f; --c-pisanje:#7c4dff; --c-bojanka:#00a3bf; --c-citanje:#c2255c; --c-slikovnice:#364fc7; --c-novac:#b08900; --c-logika:#5c940d; --c-kviz:#f76707; --c-svijet:#0c8599; --c-osjecaji:#ae3ec9; --c-glazba:#495057; --c-hrvatska:#c62828; --c-linije:#1864ab; --c-brojalice:#e64980; --c-vrt:#2f9e44; --c-medalje:#e67700; --c-engleski:#1971c2; --c-kalendar:#0b7285; --c-promet:#e8590c; --c-programer:#5f3dc4; --c-usporedi:#4c6ef5; --c-zdravlje:#d6336c; --c-zanimanja:#a61e4d; --c-otpad:#37b24d; --c-svemir:#1c1f5c; --c-advent:#c92a2a; --c-snimi:#f08c00; --c-rodjendan:#e64980;
+  --c-znam:#ff8a3d; --c-slova:#ff7a59; --c-brojke:#3d7bfd; --c-racun:#16a37f; --c-oblici:#f0a500; --c-boje:#e84393; --c-zivotinje:#9b6b4f; --c-pisanje:#7c4dff; --c-skola:#e64980; --c-dino:#2b8a3e; --c-bojanka:#00a3bf; --c-citanje:#c2255c; --c-slikovnice:#364fc7; --c-novac:#b08900; --c-logika:#5c940d; --c-kviz:#f76707; --c-svijet:#0c8599; --c-osjecaji:#ae3ec9; --c-glazba:#495057; --c-hrvatska:#c62828; --c-linije:#1864ab; --c-brojalice:#e64980; --c-vrt:#2f9e44; --c-medalje:#e67700; --c-engleski:#1971c2; --c-kalendar:#0b7285; --c-promet:#e8590c; --c-programer:#5f3dc4; --c-usporedi:#4c6ef5; --c-zdravlje:#d6336c; --c-zanimanja:#a61e4d; --c-otpad:#37b24d; --c-svemir:#1c1f5c; --c-advent:#c92a2a; --c-snimi:#f08c00; --c-rodjendan:#e64980;
   --display:"Fredoka","Baloo 2","Trebuchet MS",system-ui,sans-serif; --body:"Nunito","Segoe UI",system-ui,sans-serif;
   color-scheme:light;
 }
@@ -179,6 +179,28 @@ main{flex:1;min-height:0;overflow:auto;padding:16px;display:flex;flex-direction:
 @keyframes pulse{50%{filter:brightness(1.25)}}
 .days{display:flex;flex-direction:column;gap:8px;width:100%;max-width:480px}
 .days button{border:none;border-radius:16px;padding:12px 18px;font:600 24px var(--display);color:#fff;cursor:pointer;text-align:left}
+.sentence{display:flex;flex-direction:column;align-items:center;gap:10px;width:100%}
+.stxt{font:700 clamp(28px,6vw,52px)/1.25 var(--display);letter-spacing:2px;background:var(--card);border-radius:22px;padding:14px 22px;box-shadow:0 0 0 3px var(--line) inset;text-align:center;max-width:760px}
+.recemo{font-size:clamp(46px,9vw,78px);letter-spacing:-6px;line-height:1}
+.lrleg{display:flex;justify-content:space-between;width:100%;max-width:560px;font:700 22px var(--display);color:var(--c)}
+.lrrow{display:flex;gap:26px;font-size:clamp(56px,12vw,96px);line-height:1.1;background:var(--card);border-radius:24px;padding:10px 28px;box-shadow:0 0 0 3px var(--line) inset}
+.numline{display:flex;gap:10px}.numline span{min-width:86px;height:86px;display:grid;place-items:center;border-radius:20px;background:var(--card);box-shadow:0 0 0 3px var(--line) inset;font:700 46px var(--display)}.numline .q{background:#ffe3ef;color:var(--c)}
+.sud{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;grid-template-rows:1fr 1fr 1fr 1fr;gap:5px;width:min(88vw,420px,calc(100vh - 330px));min-width:260px;aspect-ratio:1;background:var(--line);padding:6px;border-radius:22px}
+.sud .sc{border:none;border-radius:14px;background:#fff;font-size:clamp(30px,8vw,56px);cursor:pointer;min-height:0;padding:0;display:grid;place-items:center}
+.sud .sc.giv{background:#f1edf9;cursor:default}.sud .sc.sel{box-shadow:0 0 0 5px var(--c) inset;background:#fff0f6}
+.sud .sc.br{margin-right:5px}.sud .sc.bb{margin-bottom:5px}
+.sudpal .sudb{font-size:42px;min-width:78px;min-height:78px;padding:0}
+.shake{animation:shk .35s}@keyframes shk{25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+.pchart{display:flex;gap:4px;align-items:flex-end;height:150px;padding:6px 0}.pcol{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:2px}.pcol i{display:block;width:100%;max-width:26px;background:var(--c-skola);border-radius:6px 6px 2px 2px;min-height:2px}.pcol small{font-size:10px;white-space:nowrap}.pcol span{font-size:12px;opacity:.6}
+.areagrid{display:flex;flex-wrap:wrap;gap:6px}.areab{border:none;border-radius:12px;padding:8px 10px;font:600 15px var(--body);background:#eee;color:#999;cursor:pointer}.areab.on{background:#e6f7ef;color:#16a37f}
+.paper canvas{background:#fffdf7}
+.dgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;width:100%;max-width:900px}
+.dtile{background:var(--card);border:none;border-radius:22px;box-shadow:0 0 0 3px var(--line) inset;padding:6px 6px 10px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;font:600 16px var(--display);color:var(--ink)}
+.dtile.seen{box-shadow:0 0 0 3px var(--c-dino) inset}.dtile .dsvg{width:100%;height:auto}
+.dbig{width:min(80vw,380px)}.dbig .dsvg{width:100%;height:auto;display:block}
+.dfact{font:600 clamp(18px,3.4vw,24px)/1.35 var(--body);max-width:600px;margin:4px 0 10px}
+.opt.dopt{padding:4px}.opt.dopt .dsvg{width:100%;height:auto;max-height:22vh}
+.dname{font:700 clamp(20px,4vw,30px) var(--display)}
 .ptab{width:100%;max-width:640px;border-collapse:collapse;font-size:18px;background:var(--card);border-radius:16px;overflow:hidden}
 .ptab td,.ptab th{padding:8px 12px;border-bottom:1px solid var(--line);text-align:left}
 .ptab td.n{text-align:right;font-variant-numeric:tabular-nums}
@@ -475,6 +497,8 @@ const MODS=[
   {n:'Slova',c:'var(--c-slova)',ic:'A',go:()=>modSlova()},
   {n:'Čitanje',c:'var(--c-citanje)',ic:'MA',go:()=>modCitanje()},
   {n:'Pisanje',c:'var(--c-pisanje)',ic:'✏️',go:()=>modPisanje()},
+  {n:'Škola',c:'var(--c-skola)',ic:'🎒',go:()=>modSkola()},
+  {n:'Dinosauri',c:'var(--c-dino)',ic:'🦕',go:()=>modDino()},
   {n:'Slikovnice',c:'var(--c-slikovnice)',ic:'📖',go:()=>modSlikovnice()},
   {n:'Engleski',c:'var(--c-engleski)',ic:'🇬🇧',go:()=>modEngleski()},
   {n:'Brojke',c:'var(--c-brojke)',ic:'7',go:()=>modBrojke()},
@@ -510,13 +534,13 @@ function home(){pathCtx=null;const w=screen('Leona uči',null);
   w.appendChild(el('p','hello',isBirthday()?'🎂 Sretan rođendan, Leona!':'Bok, Leona! Što ćemo danas?'));
   {const bd=daysToBirthday();if(bd>0&&bd<=30)w.appendChild(el('p','bdayline',`🎂 Još ${bd} ${bd%10===1&&bd!==11?'dan':'dana'} do tvog rođendana!`));if(bd===0)w.appendChild(button('btn','🎂 Rođendansko iznenađenje!',birthdayScreen));}
   const top=el('div','homeTop');
-  const lv=el('div','seg');[['🐣 Mala','Mala razina, za pet godina.'],['🎓 Velika','Velika razina, za šest godina i prvi razred.']].forEach(([n,sp],i)=>{const b=button(i===LVL?'on':'',n,()=>{setLvl(i);[...lv.children].forEach((x,k)=>x.classList.toggle('on',k===i));SFX.tap();say(sp);});lv.appendChild(b);});
+  const lv=lvlSeg(true);
   const today=new Date().toDateString(),doneToday=load('pathDone','')===today;
   const pc=button('pathcard',`<span class="pe">${doneToday?'🏅':'🗺️'}</span><span><b>Današnji put</b><small>${doneToday?'Gotovo za danas! Možeš opet.':'5 kratkih zadataka'}</small></span>`,()=>{SFX.tap();startPath();},'Današnji put');
   const vb=button('pathcard small',`<span class="pe">🌷</span><span><b>Moj vrt</b><small>⭐ troši zvjezdice</small></span>`,()=>{SFX.tap();modVrt('vrt');},'Moj vrt');vb.style.background='var(--c-vrt)';
   const mb=button('pathcard small',`<span class="pe">🏅</span><span><b>Medalje</b><small>${Object.values(load('medals',{})).reduce((a,b)=>a+b,0)} skupljeno</small></span>`,()=>{SFX.tap();modMedalje();},'Medalje');mb.style.background='var(--c-medalje)';
   top.appendChild(pc);top.appendChild(vb);top.appendChild(mb);top.appendChild(lv);w.appendChild(top);
-  const g=el('div','tiles');MODS.forEach(m=>{const t=button('tile',`<span class="ic" style="background:${m.c};${m.ic.length>2&&!m.ic.startsWith('<')?'font-size:28px':''}">${m.ic}</span><span class="nm">${m.n}</span>`,()=>{SFX.tap();say(m.n);m.go();},m.n);g.appendChild(t);});
+  const g=el('div','tiles');MODS.filter(m=>!HIDDEN.includes(m.n)).forEach(m=>{const t=button('tile',`<span class="ic" style="background:${m.c};${m.ic.length>2&&!m.ic.startsWith('<')?'font-size:28px':''}">${m.ic}</span><span class="nm">${m.n}</span>`,()=>{SFX.tap();say(m.n);m.go();},m.n);g.appendChild(t);});
   w.appendChild(g);
   const pb=button('btn soft parentBtn','👪 Za roditelje (drži 2 sekunde)',()=>{},'Za roditelje');let ht;pb.addEventListener('pointerdown',()=>{ht=setTimeout(parentCorner,2000);});['pointerup','pointerleave','pointercancel'].forEach(e=>pb.addEventListener(e,()=>clearTimeout(ht)));
   {const kb=button('btn soft parentBtn','👤 '+KX('Leona')+' · promijeni ime',()=>{SFX.tap();kidSetup(false);},'Promijeni ime');w.appendChild(kb);}
@@ -528,7 +552,7 @@ document.addEventListener('keydown',e=>{if(!curLR||!document.body.contains(curLR
 
 /* generic module menu */
 function menu(title,color,intro,items,back){const w=screen(title,back||home,color);w.appendChild(el('p','hello',intro));
-  const g=el('div','tiles');items.forEach(it=>g.appendChild(button('tile',`<span class="ic" style="background:${color}">${it.ic}</span><span class="nm">${it.n}</span>`,()=>{SFX.tap();it.go();},it.n)));
+  const g=el('div','tiles');items.forEach(it=>g.appendChild(button('tile',`<span class="ic" style="background:${color}">${it.ic}</span><span class="nm">${it.n}</span>`,()=>{SFX.tap();preLaunch(it.n);it.go();},it.n)));
   w.appendChild(g);say(intro,{prompt:true});}
 
 /* generic quiz: 5 rounds */
@@ -540,12 +564,12 @@ function quiz(cfg){let round=0,score=0;const P=pathCtx;const N=P?2:(cfg.rounds||
     const opts=el('div','opts'+(q.lr?' lr':''));if(q.cols)opts.style.gridTemplateColumns=`repeat(${q.cols},minmax(0,1fr))`;let tries=0,locked=false;
     q.options.forEach(o=>{const b=button('opt'+(o.cls?' '+o.cls:''),o.html,()=>{if(locked||b.classList.contains('no'))return;
       if(o.v===q.answer){locked=true;b.classList.add('ok');SFX.ok();if(q.onOk)try{q.onOk();}catch(_){}if(tries===0){score++;addStar();}stat(cfg.stat||cfg.title,tries===0);confetti(40);round++;const fin=()=>{if(document.body.contains(b))next();};if(q.afterEn){say(pick(PRAISE)+(q.after?' '+q.after:''));let dn=false;const go=()=>{if(dn)return;dn=true;setTimeout(fin,900);};sayEn(q.afterEn,{queue:true,onend:go});setTimeout(go,voiceOn&&TTS?6000:900);}else sayThen(pick(PRAISE)+(q.after?' '+q.after:''),fin);}
-      else{tries++;b.classList.add('no');SFX.no();say((o.say?o.say+'. ':'')+'Pokušaj ponovno.');}},o.label||'');opts.appendChild(b);});
+      else{tries++;missLog(cfg.stat||cfg.title,q.answer);b.classList.add('no');SFX.no();say((o.say?o.say+'. ':'')+'Pokušaj ponovno.');}},o.label||'');opts.appendChild(b);});
     w.appendChild(opts);if(q.lr)curLR=[...opts.children];spk();}
   function done(){if(P){P.score+=score;return P.next();}const w=screen(cfg.title,cfg.back,cfg.color);SFX.win();confetti(140);
     const c=el('div','card');c.appendChild(el('div','emo','🏆'));c.appendChild(el('div','word',`Bravo, Leona!`));c.appendChild(el('p','sub',`Točno iz prve: ${score} od ${N}. Dobila si ${score} ⭐`));
     const r=el('div','row');r.appendChild(button('btn','Još jednom',()=>{round=0;score=0;next();}));r.appendChild(button('btn soft','Natrag',()=>cfg.back()));c.appendChild(r);w.appendChild(c);
-    if(LVL===0&&score===N){const pf=load('perfect',0)+1;store('perfect',pf);if(pf>=3){c.appendChild(el('p','sub','Ide ti odlično! Probaj veliku razinu.'));c.appendChild(button('btn','🎓 Velika razina',()=>{setLvl(1);store('perfect',0);round=0;score=0;next();}));}}
+    if(LVLMODE!=='auto'&&LVL===0&&score===N){const pf=load('perfect',0)+1;store('perfect',pf);if(pf>=3){c.appendChild(el('p','sub','Ide ti odlično! Probaj veliku razinu.'));c.appendChild(button('btn','🎓 Velika razina',()=>{setLvl(1);store('perfect',0);round=0;score=0;next();}));}}
     say(`Bravo Leona! Dobila si ${score} ${score===1?'zvjezdicu':score>=2&&score<=4?'zvjezdice':'zvjezdica'}.`,{prompt:true});}
   next();}
 function options(all,answer,n,key){const others=shuffle(all.filter(x=>key(x)!==key(answer))).slice(0,n-1);return shuffle([answer,...others]);}
@@ -1542,7 +1566,7 @@ function parentCorner(){const w=screen('Za roditelje',home,'var(--ink)');const s
   const weak=keys.filter(k=>{const e=st[k];return e.ok+e.bad>=5&&e.ok/(e.ok+e.bad)<.6;});if(weak.length)c.appendChild(el('p','sub',`Za vježbu: ${weak.join(', ')}.`));
   {const vs=TTS?TTS.getVoices():[];pickVoice();const info=!TTS?'Ovaj preglednik ne podržava glas.':hrVoice?`Glas: ${hrVoice.name} (${hrVoice.lang})`:`Hrvatski glas nije pronađen (glasova na uređaju: ${vs.length}). Instaliraj hrvatski u postavkama pretvaranja teksta u govor ili otvori u Edgeu.`;
    c.appendChild(el('div','lbl','Glas'));c.appendChild(el('p','sub',info));c.appendChild(button('btn soft','🔊 Probaj glas',()=>{voiceOn=true;store('voice',true);updVoice();say('Bok Leona! Ovo je probni glas. Jedan, dva, tri.');}));}
-  c.appendChild(el('div','lbl','Razina'));const lv=el('div','seg');['🐣 Mala (5 g.)','🎓 Velika (6 g. / 1. razred)'].forEach((n,i)=>{const b=button(i===LVL?'on':'',n,()=>{setLvl(i);[...lv.children].forEach((x,k)=>x.classList.toggle('on',k===i));});lv.appendChild(b);});c.appendChild(lv);
+  c.appendChild(el('div','lbl','Razina (Automatski: svaka igra sama postaje teža ili lakša prema uspjehu)'));c.appendChild(lvlSeg(false));
   c.appendChild(el('div','lbl','Dnevno vrijeme (poslije toga dolazi poruka za odmor)'));const lm=el('div','seg');const cur=load('limit',0);[[0,'Bez'],[15,'15 min'],[30,'30 min'],[45,'45 min']].forEach(([v,n])=>{const b=button(v===cur?'on':'',n,()=>{store('limit',v);[...lm.children].forEach(x=>x.classList.toggle('on',x===b));});lm.appendChild(b);});c.appendChild(lm);
   c.appendChild(el('div','lbl','Pregled iznenađenja'));{const pr=el('div','row');pr.appendChild(button('btn soft',`🎂 Rođendan (${BDAY.d}.${BDAY.m+1}.)`,birthdayScreen));pr.appendChild(button('btn soft','🎄 Advent (pregled)',()=>adventScreen(true)));c.appendChild(pr);}
   const rz=button('btn soft','Obriši statistiku',()=>{if(rz.dataset.ok){store('stats',{});parentCorner();}else{rz.dataset.ok=1;rz.textContent='Sigurno? Dodirni još jednom';}});c.appendChild(rz);
@@ -2343,6 +2367,344 @@ function modSnimi(){const w=screen('Snimi svoj glas',home,CSN);let wd=pick(RECW)
   function playRec(rate){if(!recBuf||!ac)return;withAudio(()=>{let b=recBuf;if(rate<0){b=ac.createBuffer(recBuf.numberOfChannels,recBuf.length,recBuf.sampleRate);for(let ch=0;ch<b.numberOfChannels;ch++){const s=recBuf.getChannelData(ch),d=b.getChannelData(ch);for(let i=0;i<s.length;i++)d[i]=s[s.length-1-i];}}
     const s=ac.createBufferSource();s.buffer=b;s.playbackRate.value=Math.abs(rate);const g=ac.createGain();g.gain.value=1.4;s.connect(g).connect(ac.destination);s.start();});}
   say('Snimi svoj glas! Dodirni mikrofon i reci: '+wd[0],{prompt:true});}
+
+
+/* ==========================================================
+   ŠKOLA, PRILAGODLJIVA TEŽINA, KUTAK ZA RODITELJE (dodatci)
+   ========================================================== */
+/* ---------- prilagodljiva težina ---------- */
+let LVLMODE=load('lvlmode','auto');let ADL=load('adl',{});let MENUKEY=load('menukey',{});let curMenu=null;
+function lvlFor(k){if(LVLMODE!=='auto')return load('lvl',0);const e=k&&ADL[k];return e?e.l:0;}
+function preLaunch(n){curMenu=n;if(LVLMODE==='auto')LVL=lvlFor(MENUKEY[n]);}
+function setMode(m,v){LVLMODE=m;store('lvlmode',m);if(m!=='auto'){setLvl(v);}else{LVL=0;}}
+function lvlSeg(spoken){const lv=el('div','seg');const opts=[['🐣 Mala','man',0,'Mala razina, za pet godina.'],['🎓 Velika','man',1,'Velika razina, za šest godina i prvi razred.'],['✨ Automatski','auto',0,'Automatski. Zadaci postaju teži kad ti ide dobro.']];
+  const isOn=o=>o[1]==='auto'?LVLMODE==='auto':LVLMODE!=='auto'&&LVL===o[2];
+  opts.forEach(o=>{const b=button(isOn(o)?'on':'',o[0],()=>{setMode(o[1],o[2]);[...lv.children].forEach((x,k)=>x.classList.toggle('on',isOn(opts[k])));SFX.tap();if(spoken)say(o[3]);});lv.appendChild(b);});return lv;}
+function adapt(k,ok){if(LVLMODE!=='auto'||!k)return;if(curMenu&&!MENUKEY[curMenu]){MENUKEY[curMenu]=k;store('menukey',MENUKEY);}
+  const e=ADL[k]||(ADL[k]={l:0,h:[]});e.h.push(ok?1:0);if(e.h.length>8)e.h.shift();
+  const last=n=>e.h.slice(-n);
+  if(e.l===0&&e.h.length>=6&&last(6).every(x=>x)){e.l=1;e.h=[];LVL=1;setTimeout(()=>toast('🎓 Ide ti odlično! Sada malo teže.'),700);}
+  else if(e.l===1&&e.h.length>=5&&last(5).filter(x=>!x).length>=3){e.l=0;e.h=[];LVL=0;setTimeout(()=>toast('🐣 Idemo malo lakše.'),700);}
+  else LVL=e.l;
+  store('adl',ADL);}
+{const _stat=stat;stat=function(k,ok){_stat(k,ok);adapt(k,ok);};}
+{const _quiz=quiz;quiz=function(cfg){const k=cfg.stat||cfg.title;if(LVLMODE==='auto'){LVL=lvlFor(k);if(curMenu&&!MENUKEY[curMenu]){MENUKEY[curMenu]=k;store('menukey',MENUKEY);}}return _quiz(cfg);};}
+if(LVLMODE==='auto')LVL=0;
+/* pogreške po stavkama */
+function missLog(k,ans){if(ans==null||typeof ans==='object')return;const s=String(ans);if(s.length>14)return;const m=load('miss',{});const e=m[k]||(m[k]={});e[s]=(e[s]||0)+1;store('miss',m);}
+/* dnevnik po danima */
+function dayKey(d=new Date()){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+let DLOG=load('days',{});
+function dayRec(){const k=dayKey();return DLOG[k]||(DLOG[k]={m:0,st:0});}
+{const _add=addStar;addStar=function(n=1){_add(n);dayRec().st+=n;store('days',DLOG);};}
+setInterval(()=>{if(document.hidden||Date.now()-lastAct>90000)return;dayRec().m+=1/6;const ks=Object.keys(DLOG).sort();while(ks.length>60)delete DLOG[ks.shift()];store('days',DLOG);
+  const bt=load('bedtime',0);if(bt&&!resting){const h=new Date().getHours();if(h>=bt||h<6)restScreen();}},10000);
+/* skrivena područja */
+let HIDDEN=load('hidden',[]);
+/* roditeljska vrata */
+function parentGate(go){const w=screen('Za roditelje',home,'var(--ink)');const a=6+rnd(4),b=6+rnd(4),r=a*b;
+  const c=el('div','card');c.appendChild(el('div','word','Samo za odrasle'));c.appendChild(el('p','sub',`Koliko je ${a} × ${b}?`));
+  const opts=shuffle([r,r+a,r-b,r+10]).filter((x,i,arr)=>arr.indexOf(x)===i).slice(0,4);const row=el('div','row');
+  opts.forEach(v=>row.appendChild(button('btn soft',String(v),()=>{if(v===r)go();else home();})));c.appendChild(row);w.appendChild(c);}
+function parentExtras(){const w=view.querySelector('.wrap');if(!w)return;const c=el('div','card');c.style.alignItems='stretch';c.style.textAlign='left';
+  // napredak po danima
+  c.appendChild(el('div','lbl','Zadnjih 14 dana (minute igranja i ⭐)'));const ch=el('div','pchart');const now=new Date();let mx=5;const ds=[];
+  for(let i=13;i>=0;i--){const d=new Date(now);d.setDate(now.getDate()-i);const r=DLOG[dayKey(d)]||{m:0,st:0};ds.push([d,r]);mx=Math.max(mx,r.m);}
+  ds.forEach(([d,r])=>{const col=el('div','pcol');col.innerHTML=`<small>${r.st?r.st+'⭐':''}</small><i style="height:${Math.round(r.m/mx*100)}%" title="${Math.round(r.m)} min"></i><span>${d.getDate()}.</span>`;ch.appendChild(col);});
+  c.appendChild(ch);const tot=ds.reduce((s,[,r])=>s+r.m,0),act=ds.filter(([,r])=>r.m>=1).length;c.appendChild(el('p','sub',`Ukupno ${Math.round(tot)} min u ${act} ${act===1?'dan':'dana'} · prosjek ${act?Math.round(tot/act):0} min po danu igranja.`));
+  // razine po području
+  if(LVLMODE==='auto'){const ks=Object.keys(ADL).sort();c.appendChild(el('div','lbl','Automatska razina po igri'));
+    if(!ks.length)c.appendChild(el('p','sub','Razine će se pojaviti nakon prvih riješenih zadataka.'));
+    else{let h='<table class="ptab"><tr><th>Igra</th><th class="n">Razina</th></tr>';ks.forEach(k=>{h+=`<tr><td>${k}</td><td class="n">${ADL[k].l?'🎓 Velika':'🐣 Mala'}</td></tr>`;});c.insertAdjacentHTML('beforeend',KX(h+'</table>'));}}
+  // pogreške
+  const m=load('miss',{});const mk=Object.keys(m).map(k=>[k,Object.entries(m[k]).sort((a,b)=>b[1]-a[1]).filter(x=>x[1]>=2).slice(0,4)]).filter(x=>x[1].length).sort((a,b)=>b[1][0][1]-a[1][0][1]).slice(0,8);
+  c.appendChild(el('div','lbl','Najčešće pogreške (točan odgovor koji je promašen)'));
+  if(!mk.length)c.appendChild(el('p','sub','Još nema ponovljenih pogrešaka.'));
+  else{let h='<table class="ptab"><tr><th>Igra</th><th>Promašeno</th></tr>';mk.forEach(([k,l])=>{h+=`<tr><td>${k}</td><td>${l.map(([a,n])=>`<b>${a}</b> (${n}×)`).join(', ')}</td></tr>`;});c.insertAdjacentHTML('beforeend',KX(h+'</table>'));
+    const rm=button('btn soft','Obriši popis pogrešaka',()=>{store('miss',{});parentCorner();});c.appendChild(rm);}
+  // vrijeme za spavanje
+  c.appendChild(el('div','lbl','Ne igrati nakon (večernje zaključavanje)'));const bs=el('div','seg');const bt=load('bedtime',0);
+  [[0,'Bez'],[19,'19 h'],[20,'20 h'],[21,'21 h']].forEach(([v,n])=>{const b=button(v===bt?'on':'',n,()=>{store('bedtime',v);[...bs.children].forEach(x=>x.classList.toggle('on',x===b));});bs.appendChild(b);});c.appendChild(bs);
+  // područja
+  c.appendChild(el('div','lbl','Područja na početnom zaslonu (dodirni za sakriti ili prikazati)'));const ar=el('div','areagrid');
+  MODS.forEach(mo=>{const b=button('areab'+(HIDDEN.includes(mo.n)?'':' on'),(HIDDEN.includes(mo.n)?'🚫 ':'✔ ')+mo.n,()=>{HIDDEN=HIDDEN.includes(mo.n)?HIDDEN.filter(x=>x!==mo.n):[...HIDDEN,mo.n];store('hidden',HIDDEN);const on=!HIDDEN.includes(mo.n);b.classList.toggle('on',on);b.textContent=(on?'✔ ':'🚫 ')+mo.n;});ar.appendChild(b);});
+  c.appendChild(ar);
+  const main=[...w.querySelectorAll('.card')].find(x=>x.querySelector('.ptab'))||w.querySelector('.card');if(main&&main.nextSibling)w.insertBefore(c,main.nextSibling);else w.appendChild(c);}
+{const _pc=parentCorner;parentCorner=function(){parentGate(()=>{_pc();parentExtras();});};
+ window.__pcDirect=()=>{_pc();parentExtras();};}
+
+/* ---------- ŠKOLA ---------- */
+const CSK='var(--c-skola)';
+AREAS.push(['Škola','🎒',['Škola'],[10,30,60]]);
+function modSkola(){menu('Škola',CSK,'Pripremamo se za školu!',[
+  {n:'Pisanje po potezima',ic:'✍️',go:()=>potezi('slova',0)},
+  {n:'Brojke po potezima',ic:'✍️1',go:()=>potezi('brojke',0)},
+  {n:'Čitam rečenice',ic:'📝',go:recenice},
+  {n:'Lijevo i desno',ic:'⬅️➡️',go:lijevoDesno},
+  {n:'Susjedi brojeva',ic:'7?9',go:susjedi},
+  {n:'Sudoku sa sličicama',ic:'🍎🍌',go:()=>sudoku()}]);}
+
+/* --- potezi: slova i brojke po redoslijedu poteza --- */
+function Lp(...p){const o=[];for(let i=0;i<p.length;i+=2)o.push([p[i],p[i+1]]);return o;}
+function Ap(cx,cy,rx,ry,a0,a1){const o=[];const n=Math.max(8,Math.round(Math.abs(a1-a0)/8));for(let i=0;i<=n;i++){const a=(a0+(a1-a0)*i/n)*Math.PI/180;o.push([cx+rx*Math.cos(a),cy+ry*Math.sin(a)]);}return o;}
+const J=(...ps)=>ps.flat();
+const CARON=Lp(20,-26,30,-12,40,-26),ACUTE=Lp(30,-12,42,-28);
+const GL={
+ A:{w:60,s:[Lp(30,0,2,100),Lp(30,0,58,100),Lp(14,64,46,64)]},
+ B:{w:52,s:[Lp(8,0,8,100),J(Lp(8,0,28,0),Ap(28,24,20,24,-90,90),Lp(28,48,8,48)),J(Lp(8,48,30,48),Ap(30,74,22,26,-90,90),Lp(30,100,8,100))]},
+ C:{w:58,s:[Ap(32,50,27,50,-40,-320)]},
+ 'Č':{w:58,s:[Ap(32,50,27,50,-40,-320),CARON]},
+ 'Ć':{w:58,s:[Ap(32,50,27,50,-40,-320),ACUTE]},
+ D:{w:56,s:[Lp(8,0,8,100),J(Lp(8,0,22,0),Ap(22,50,30,50,-90,90),Lp(22,100,8,100))]},
+ 'Đ':{w:56,s:[Lp(8,0,8,100),J(Lp(8,0,22,0),Ap(22,50,30,50,-90,90),Lp(22,100,8,100)),Lp(0,50,20,50)]},
+ E:{w:50,s:[Lp(8,0,8,100),Lp(8,0,48,0),Lp(8,50,40,50),Lp(8,100,48,100)]},
+ F:{w:48,s:[Lp(8,0,8,100),Lp(8,0,46,0),Lp(8,50,38,50)]},
+ G:{w:60,s:[Ap(32,50,27,50,-40,-358),Lp(36,54,59,54,59,98)]},
+ H:{w:58,s:[Lp(6,0,6,100),Lp(52,0,52,100),Lp(6,50,52,50)]},
+ I:{w:20,s:[Lp(10,0,10,100)]},
+ J:{w:46,s:[J(Lp(38,0,38,72),Ap(20,72,18,26,0,165))]},
+ K:{w:54,s:[Lp(8,0,8,100),Lp(50,0,8,58),Lp(22,44,52,100)]},
+ L:{w:46,s:[Lp(8,0,8,100,44,100)]},
+ M:{w:62,s:[Lp(5,100,5,0),Lp(5,0,31,64,57,0,57,100)]},
+ N:{w:58,s:[Lp(6,100,6,0),Lp(6,0,52,100,52,0)]},
+ O:{w:62,s:[Ap(31,50,28,50,-90,-450)]},
+ P:{w:50,s:[Lp(8,0,8,100),J(Lp(8,0,26,0),Ap(26,26,22,26,-90,90),Lp(26,52,8,52))]},
+ R:{w:54,s:[Lp(8,0,8,100),J(Lp(8,0,26,0),Ap(26,26,22,26,-90,90),Lp(26,52,8,52)),Lp(24,52,52,100)]},
+ S:{w:54,s:[J(Ap(28,25,23,25,-25,-270),Ap(28,75,24,25,-90,150))]},
+ 'Š':{w:54,s:[J(Ap(28,25,23,25,-25,-270),Ap(28,75,24,25,-90,150)),CARON]},
+ T:{w:56,s:[Lp(2,0,54,0),Lp(28,0,28,100)]},
+ U:{w:56,s:[J(Lp(6,0,6,66),Ap(28,66,22,34,180,0),Lp(50,66,50,0))]},
+ V:{w:58,s:[Lp(2,0,29,100,56,0)]},
+ Z:{w:54,s:[Lp(4,0,50,0,4,100,50,100)]},
+ 'Ž':{w:54,s:[Lp(4,0,50,0,4,100,50,100),CARON]},
+ '0':{w:50,s:[Ap(25,50,22,50,-90,-450)]},
+ '1':{w:40,s:[Lp(8,26,28,0,28,100)]},
+ '2':{w:50,s:[J(Ap(25,26,21,24,-165,10),Lp(45,32,4,100,48,100))]},
+ '3':{w:50,s:[J(Ap(24,25,20,25,-150,90),Ap(24,75,22,25,-90,150))]},
+ '4':{w:52,s:[Lp(34,0,4,66,50,66),Lp(36,34,36,100)]},
+ '5':{w:50,s:[J(Lp(12,0,9,44),Ap(25,70,21,30,-125,150)),Lp(12,0,46,0)]},
+ '6':{w:50,s:[J(Ap(27,50,22,50,-55,-270),Ap(27,75,21,25,90,-270))]},
+ '7':{w:50,s:[Lp(4,0,48,0,18,100)]},
+ '8':{w:50,s:[Ap(25,25,18,25,-90,-450),Ap(25,75,22,25,-90,270)]},
+ '9':{w:50,s:[Ap(25,26,20,26,0,-360),Lp(45,26,40,100)]}};
+const POT_SL=['A','B','C','Č','Ć','D','Đ','E','F','G','H','I','J','K','L','M','N','O','P','R','S','Š','T','U','V','Z','Ž'];
+const POT_BR='0123456789'.split('');
+let potDone=load('potezi',{});
+function sampleStroke(p){const o=[p[0]];for(let i=1;i<p.length;i++){const a=p[i-1],b=p[i];const d=Math.hypot(b[0]-a[0],b[1]-a[1]);const n=Math.max(1,Math.ceil(d/2.5));for(let k=1;k<=n;k++)o.push([a[0]+(b[0]-a[0])*k/n,a[1]+(b[1]-a[1])*k/n]);}return o;}
+function potezi(kind,idx){const items=kind==='slova'?POT_SL:POT_BR;const ch=items[idx];const g=GL[ch];
+  const say1=kind==='slova'?`slovo ${(LETTERS.find(l=>l[0]===ch)||[0,ch])[1]}`:`broj ${NUMW[+ch]}`;
+  const w=screen((kind==='slova'?'Slovo ':'Broj ')+ch,modSkola,CSK);
+  const info=el('p','hello',`Piši potez po potez. Počni od <b style="color:#16a37f">zelene točke</b>.`);w.appendChild(info);
+  const box=el('div','canvasbox paper');const cv=el('canvas');box.appendChild(cv);w.appendChild(box);
+  const r=el('div','row');r.appendChild(button('btn soft','👀 Pokaži',()=>{demo();}));r.appendChild(button('btn soft','🧽 Ispočetka',()=>{si=0;doneSt=[];cur=[];draw();sayStroke();}));r.appendChild(button('btn soft','⟶',()=>potezi(kind,(idx+1)%items.length),'Sljedeće'));w.appendChild(r);
+  const strip=el('div','mini');strip.style.gridTemplateColumns='repeat(auto-fill,minmax(54px,1fr))';items.forEach((it,i)=>{const b=button(potDone[kind+it]?'done':'',it,()=>potezi(kind,i),it);b.style.minHeight='54px';b.style.fontSize='24px';if(i===idx)b.style.background='#ffe3ef';strip.appendChild(b);});w.appendChild(strip);
+  let S=0,ctx,sc,ox,oy,si=0,doneSt=[],cur=[],drawing=false,prog=0,dev=0,devN=0,anim=null,okAll=false;const dpr=Math.min(2,window.devicePixelRatio||1);
+  const strokes=g.s.map(sampleStroke);const tol=()=>(LVL?13:17);
+  const T=([x,y])=>[ox+x*sc,oy+y*sc];
+  function setup(){if(!document.body.contains(cv))return;const rc=cv.getBoundingClientRect();if(rc.width<20){requestAnimationFrame(setup);return;}S=Math.round(rc.width*dpr);cv.width=cv.height=S;ctx=cv.getContext('2d');
+    sc=S*.55/100;ox=(S-g.w*sc)/2;oy=S*.3;draw();sayStroke();setTimeout(demo,500);}
+  function lines(){ctx.fillStyle='#fffdf7';ctx.fillRect(0,0,S,S);ctx.lineWidth=Math.max(1.5,S*.004);
+    ctx.strokeStyle='#9ec5ef';for(const y of[0,100]){ctx.beginPath();ctx.moveTo(S*.04,oy+y*sc);ctx.lineTo(S*.96,oy+y*sc);ctx.stroke();}
+    ctx.setLineDash([S*.015,S*.015]);ctx.strokeStyle='#c9dcf2';ctx.beginPath();ctx.moveTo(S*.04,oy+50*sc);ctx.lineTo(S*.96,oy+50*sc);ctx.stroke();ctx.setLineDash([]);
+    ctx.strokeStyle='#f3a5b8';ctx.beginPath();ctx.moveTo(S*.08,S*.04);ctx.lineTo(S*.08,S*.96);ctx.stroke();}
+  function path(pts){ctx.beginPath();pts.forEach((p,i)=>{const[q,w2]=T(p);i?ctx.lineTo(q,w2):ctx.moveTo(q,w2);});}
+  function arrow(pts){const n=pts.length;const a=T(pts[Math.min(n-1,Math.round(n*.45))]),b=T(pts[Math.min(n-1,Math.round(n*.45)+3)]);const ang=Math.atan2(b[1]-a[1],b[0]-a[0]);const L=S*.035;
+    ctx.save();ctx.translate(b[0],b[1]);ctx.rotate(ang);ctx.fillStyle='#ff6f91';ctx.beginPath();ctx.moveTo(L,0);ctx.lineTo(-L*.6,-L*.7);ctx.lineTo(-L*.6,L*.7);ctx.closePath();ctx.fill();ctx.restore();}
+  function draw(){if(!ctx)return;lines();ctx.lineCap='round';ctx.lineJoin='round';
+    strokes.forEach((s,k)=>{path(s);ctx.lineWidth=S*.05;ctx.strokeStyle=k<si?'#7c4dff':'#eceaf3';ctx.stroke();});
+    if(si<strokes.length&&!okAll){const s=strokes[si];path(s);ctx.lineWidth=S*.05;ctx.strokeStyle='#ffd3e0';ctx.stroke();ctx.setLineDash([S*.012,S*.014]);ctx.lineWidth=S*.008;ctx.strokeStyle='#ff6f91';path(s);ctx.stroke();ctx.setLineDash([]);arrow(s);
+      const[sx,sy]=T(s[0]);ctx.fillStyle='#16a37f';ctx.beginPath();ctx.arc(sx,sy,S*.03,0,7);ctx.fill();ctx.fillStyle='#fff';ctx.font=`700 ${Math.round(S*.035)}px Fredoka,sans-serif`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(String(si+1),sx,sy+1);}
+    if(cur.length>1){ctx.beginPath();cur.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.lineWidth=S*.03;ctx.strokeStyle='#7c4dff';ctx.stroke();}
+    if(anim){const[ax,ay]=T(anim);ctx.fillStyle='#ffb000';ctx.beginPath();ctx.arc(ax,ay,S*.028,0,7);ctx.fill();ctx.font=`${Math.round(S*.05)}px sans-serif`;ctx.fillText('✏️',ax+S*.03,ay-S*.03);}}
+  function demo(){if(si>=strokes.length||!ctx)return;const s=strokes[si];let i=0;const my=++demoId;const step=()=>{if(my!==demoId||!document.body.contains(cv)){anim=null;return;}anim=s[i];draw();i+=2;if(i<s.length)requestAnimationFrame(step);else{setTimeout(()=>{if(my===demoId){anim=null;draw();}},250);}};step();}
+  let demoId=0;
+  function sayStroke(){if(si===0)say(`Napiši ${say1}. ${strokes.length>1?`Ima ${strokes.length} poteza. `:''}Počni od zelene točke i prati strelicu.`,{prompt:true});else say(`Sada ${['prvi','drugi','treći','četvrti','peti'][si]} potez.`);}
+  function toLocal(e){const rc=cv.getBoundingClientRect();return[(e.clientX-rc.left)/rc.width*S,(e.clientY-rc.top)/rc.height*S];}
+  function nearestIdx(p,s,from,to){let bi=-1,bd=1e9;for(let i=Math.max(0,from);i<=Math.min(s.length-1,to);i++){const q=T(s[i]);const d=Math.hypot(q[0]-p[0],q[1]-p[1]);if(d<bd){bd=d;bi=i;}}return[bi,bd];}
+  cv.addEventListener('pointerdown',e=>{if(okAll||si>=strokes.length)return;demoId++;anim=null;const p=toLocal(e);const s=strokes[si];const st=T(s[0]);
+    if(Math.hypot(p[0]-st[0],p[1]-st[1])>tol()*sc*1.5){SFX.no();say('Počni od zelene točke.');stat('Škola: pisanje',false);return;}
+    drawing=true;prog=0;dev=0;devN=0;cur=[p];try{cv.setPointerCapture(e.pointerId);}catch(_){}draw();});
+  cv.addEventListener('pointermove',e=>{if(!drawing)return;const p=toLocal(e);cur.push(p);const s=strokes[si];const[ni,nd]=nearestIdx(p,s,prog-6,prog+24);if(nd<tol()*sc){if(ni>prog)prog=ni;}dev+=Math.min(nd,tol()*sc*2);devN++;draw();});
+  const up=()=>{if(!drawing)return;drawing=false;const s=strokes[si];const avg=dev/Math.max(1,devN);
+    if(prog>=s.length*.88&&avg<tol()*sc){si++;cur=[];SFX.ok();if(si>=strokes.length){okAll=true;draw();potDone[kind+ch]=1;store('potezi',potDone);addStar();stat('Škola: pisanje',true);confetti(70);strip.children[idx].classList.add('done');
+        sayThen(`${pick(PRAISE)} Napisala si ${say1}.`,()=>{if(document.body.contains(cv))potezi(kind,(idx+1)%items.length);});}
+      else{draw();sayStroke();setTimeout(demo,400);}}
+    else{cur=[];draw();SFX.no();stat('Škola: pisanje',false);say(prog<s.length*.88?'Prati strelicu do kraja crte.':'Pazi da ostaneš na crti. Probaj ponovno.');}};
+  cv.addEventListener('pointerup',up);cv.addEventListener('pointercancel',up);
+  requestAnimationFrame(()=>{(document.fonts&&document.fonts.load?document.fonts.load('700 100px Fredoka'):Promise.resolve()).catch(()=>{}).then(setup);});}
+
+/* --- čitam rečenice --- */
+const REC0=[['PAS JEDE.','🐶🦴',['🐶💤','🐱🐟']],['MAČKA SPAVA.','🐱💤',['🐱🥛','🐶💤']],['RIBA PLIVA.','🐟🌊',['🐦☁️','🐸🍃']],['PTICA LETI.','🐦☁️',['🐟🌊','🐌🍃']],
+ ['SUNCE SJA.','☀️',['🌧️','🌙']],['PADA KIŠA.','🌧️',['☀️','❄️']],['PADA SNIJEG.','⛄',['🌧️','☀️']],['MAMA ČITA.','📖',['🍳','🧹']],['BEBA PLAČE.','😭',['😄','😴']],
+ ['ŽABA SKAČE.','🐸',['🐌','🐢']],['ZEC JEDE MRKVU.','🐰🥕',['🐰🍎','🐿️🥕']],['KUĆA JE VELIKA.','🏠',['🚗','🌳']],['TO JE TORTA.','🎂',['🍕','🍦']],['TO JE AUTO.','🚗',['🚲','🚂']]];
+const REC1=[['LEONA JAŠE JEDNOROGA.','🦄',['🐴','🐮']],['NA STOLU JE TORTA.','🎂',['🍕','🍦']],['U VAZI SU CVJETOVI.','💐',['🍎','🧸']],['BAKA PEČE KOLAČE.','🍪',['🎣','🧶']],
+ ['DJED PECA RIBU.','🎣',['🍪','🚲']],['MAJMUN JEDE BANANU.','🐒🍌',['🐒🍎','🐘🍌']],['VLAK VOZI PO TRAČNICAMA.','🚂',['🚢','✈️']],['BROD PLOVI MOREM.','🚢',['🚂','🚁']],
+ ['AVION LETI NEBOM.','✈️',['🚢','🚗']],['NA NEBU JE MJESEC.','🌙',['☀️','🌈']],['POSLIJE KIŠE DOLAZI DUGA.','🌈',['🌙','⚡']],['PČELA SKUPLJA MED.','🐝🍯',['🐌🍯','🐝🍎']],
+ ['KOKOŠ JE SNIJELA JAJE.','🐔🥚',['🦆🥚','🐔🌽']],['KRAVA DAJE MLIJEKO.','🐄🥛',['🐑🧶','🐄🍯']],['LJETI SE KUPAMO U MORU.','🏊',['⛷️','🛷']],['ZIMI SE SKIJAMO.','⛷️',['🏊','🚴']],
+ ['U ŠKOLI UČIMO.','🏫',['🏖️','🏥']],['IDEMO NA PLAŽU.','🏖️',['🏫','⛷️']],['DJEČAK IGRA NOGOMET.','⚽',['🏀','🎾']],['MALI MIŠ JEDE SIR.','🐭🧀',['🐱🧀','🐭🍎']]];
+function recenice(){let last=null;quiz({title:'Čitam rečenice',stat:'Škola: rečenice',back:modSkola,color:CSK,make:r=>{const pool=LVL?REC1.concat(REC0.slice(10)):REC0;let it;do{it=pick(pool);}while(it===last&&pool.length>1);last=it;
+  const txt=it[0].replace('LEONA',KX('Leona').toUpperCase());const ex=el('div','sentence');ex.appendChild(el('div','stxt',txt));const hb=button('btn soft','👂 Pročitaj mi',()=>say(txt.toLowerCase()));ex.appendChild(hb);
+  const opts=shuffle([it[1],...it[2]]).map(v=>({v,html:`<span class="recemo">${v}</span>`}));
+  return{text:'Pročitaj rečenicu i dodirni pravu sliku.',speak:'Pročitaj rečenicu i dodirni pravu sliku.',extra:ex,options:opts,answer:it[1]};}});}
+
+/* --- lijevo i desno --- */
+const LDA=['🐶','🐱','🐭','🐰','🦊','🐻','🐼','🐸','🐵','🦄','🐷','🐮'];
+function lijevoDesno(){quiz({title:'Lijevo i desno',stat:'Škola: lijevo-desno',back:modSkola,color:CSK,make:r=>{
+  const legend=el('div','lrleg','<span>⬅️ LIJEVO</span><span>DESNO ➡️</span>');
+  const t=LVL?(r%3):(r%2);
+  if(t===0){const dir=pick(['lijevo','desno','gore','dolje']);const A={lijevo:'⬅️',desno:'➡️',gore:'⬆️',dolje:'⬇️'};
+    return{text:`Dodirni strelicu koja pokazuje <b>${dir.toUpperCase()}</b>.`,speak:`Dodirni strelicu koja pokazuje ${dir}.`,extra:legend,options:shuffle(Object.entries(A)).map(([k,v])=>({v:k,html:v})),answer:dir};}
+  if(t===1){const [a,b]=shuffle(LDA).slice(0,2);const side=pick(['lijevo','desno']);const ans=side==='lijevo'?a:b;const nm={'🐶':'psa','🐱':'mačku','🐭':'miša','🐰':'zeca','🦊':'lisicu','🐻':'medu','🐼':'pandu','🐸':'žabu','🐵':'majmuna','🦄':'jednoroga','🐷':'praščića','🐮':'kravu'};
+    return{text:`Dodirni životinju koja je <b>${side.toUpperCase()}</b>.`,speak:`Dodirni životinju koja je ${side}.`,extra:LVL?null:legend,lr:true,options:[{v:a,html:a,label:nm[a]},{v:b,html:b,label:nm[b]}],answer:ans};}
+  const row=shuffle(LDA).slice(0,3);const mid=row[1];const side=pick(['lijevo','desno']);const ans=side==='lijevo'?row[0]:row[2];
+  const NM={'🐶':'psa','🐱':'mačke','🐭':'miša','🐰':'zeca','🦊':'lisice','🐻':'mede','🐼':'pande','🐸':'žabe','🐵':'majmuna','🦄':'jednoroga','🐷':'praščića','🐮':'krave'};
+  const ex=el('div','lrrow',row.map(x=>`<span>${x}</span>`).join(''));
+  return{text:`Tko je <b>${side.toUpperCase()}</b> od ${NM[mid]} ${mid}?`,speak:`Tko je ${side} od ${NM[mid]}?`,extra:ex,options:shuffle(row).map(v=>({v,html:v})),answer:ans};}});}
+
+/* --- susjedi brojeva --- */
+function susjedi(){quiz({title:'Susjedi brojeva',stat:'Škola: susjedi brojeva',back:modSkola,color:CSK,make:r=>{const max=LVL?20:10;const t=pick(LVL?['prije','poslije','između']:['prije','poslije']);
+  let ans,cells,txt,spk;
+  if(t==='prije'){const n=1+rnd(max);ans=n-1;cells=['?',n];txt=`Koji broj dolazi <b>PRIJE</b> ${n}?`;spk=`Koji broj dolazi prije broja ${NUMW[n]}?`;}
+  else if(t==='poslije'){const n=rnd(max);ans=n+1;cells=[n,'?'];txt=`Koji broj dolazi <b>POSLIJE</b> ${n}?`;spk=`Koji broj dolazi poslije broja ${NUMW[n]}?`;}
+  else{const n=1+rnd(max-1);ans=n;cells=[n-1,'?',n+1];txt=`Koji broj je <b>IZMEĐU</b> ${n-1} i ${n+1}?`;spk=`Koji broj je između ${NUMW[n-1]} i ${NUMW[n+1]}?`;}
+  const ex=el('div','numline',cells.map(c=>`<span class="${c==='?'?'q':''}">${c}</span>`).join(''));
+  const all=[...Array(max+2).keys()].filter(x=>x<=max+1&&x>=0);const near=all.filter(x=>Math.abs(x-ans)<=3&&x!==ans);const op=shuffle([ans,...shuffle(near).slice(0,LVL?3:2)]);
+  return{text:txt,speak:spk,extra:ex,options:op.map(v=>({v,html:String(v)})),answer:ans};}});}
+
+/* --- sudoku sa sličicama 4x4 --- */
+const SUDS=[['🍎','🍌','🍇','🍓'],['🐶','🐱','🐰','🐸'],['☀️','🌙','⭐','☁️'],['🔴','🔵','🟡','🟢']];
+function sudoku(){const w=screen('Sudoku sa sličicama',modSkola,CSK);const sym=pick(SUDS);
+  // valjano rješenje
+  let base=[[0,1,2,3],[2,3,0,1],[1,0,3,2],[3,2,1,0]];const pr=shuffle([0,1,2,3]);base=base.map(r=>r.map(v=>pr[v]));
+  if(Math.random()<.5)base=[base[1],base[0],base[2],base[3]];if(Math.random()<.5)base=[base[0],base[1],base[3],base[2]];
+  if(Math.random()<.5)base=base.map(r=>[r[1],r[0],r[2],r[3]]);if(Math.random()<.5)base=base.map(r=>[r[0],r[1],r[3],r[2]]);
+  const holes=LVL?8:5;const cells=shuffle([...Array(16).keys()]).slice(0,holes);const val=base.flat().map((v,i)=>cells.includes(i)?-1:v);const given=val.map(v=>v>=0);
+  w.appendChild(el('p','hello','U svakom <b>redu</b>, <b>stupcu</b> i <b>kvadratu</b> svaka sličica smije biti samo jednom.'));
+  const gridEl=el('div','sud');let sel=cells[0];let miss=0;
+  function render(){gridEl.innerHTML='';val.forEach((v,i)=>{const r=i>>2,c=i&3;const b=button('sc'+(given[i]?' giv':'')+(i===sel?' sel':'')+(c===1?' br':'')+(r===1?' bb':''),v>=0?sym[v]:'',()=>{if(given[i]||val[i]>=0&&!given[i]&&false)return;if(!given[i]){sel=i;SFX.tap();render();}});gridEl.appendChild(b);});}
+  const pal=el('div','row sudpal');sym.forEach((s,k)=>pal.appendChild(button('btn soft sudb',s,()=>{if(sel==null||given[sel])return;const i=sel,r=i>>2,c=i&3;
+    if(base[r][c]===k){val[i]=k;given[i]=true;SFX.ok();stat('Škola: sudoku',true);const nx=val.findIndex(v=>v<0);sel=nx<0?null:nx;render();if(nx<0)win();}
+    else{SFX.no();miss++;stat('Škola: sudoku',false);let why='Ta sličica ne ide ovdje.';const row=[0,1,2,3].map(cc=>val[r*4+cc]),col=[0,1,2,3].map(rr=>val[rr*4+c]),bx=[];for(let rr=r&2;rr<(r&2)+2;rr++)for(let cc=c&2;cc<(c&2)+2;cc++)bx.push(val[rr*4+cc]);
+      if(row.includes(k))why='Ta sličica je već u ovom redu.';else if(col.includes(k))why='Ta sličica je već u ovom stupcu.';else if(bx.includes(k))why='Ta sličica je već u ovom kvadratu.';say(why);
+      const b=gridEl.children[i];b.classList.add('shake');setTimeout(()=>b.classList.remove('shake'),400);}})));
+  w.appendChild(gridEl);w.appendChild(pal);render();
+  function win(){const n=miss===0?3:miss<3?2:1;addStar(n);SFX.win();confetti(140);const c=el('div','card');c.appendChild(el('div','emo','🧩'));c.appendChild(el('div','word','Bravo, Leona!'));c.appendChild(el('p','sub',`Riješila si sudoku! Dobila si ${n} ⭐`));
+    const r=el('div','row');r.appendChild(button('btn','Još jedan',()=>sudoku()));r.appendChild(button('btn soft','Natrag',()=>modSkola()));c.appendChild(r);w.appendChild(c);c.scrollIntoView({behavior:'smooth'});say(`Bravo Leona! Riješila si sudoku i dobila ${n} ${n===1?'zvjezdicu':'zvjezdice'}.`);}
+  say('Odaberi prazno polje pa dodirni sličicu koja tamo ide. U svakom redu, stupcu i kvadratu svaka sličica je samo jednom.',{prompt:true});}
+
+
+/* ---------- DINOSAURI ---------- */
+const CDI='var(--c-dino)';
+const DINOS=[
+ {id:'trex',n:'Tiranosaurus',say:'Tiranosaurus reks',f:'Bio je veliki mesojed s jakim zubima i malim rukama.',jede:'meso',m:12,col:'#5fae5f',bel:'#d4ecb0',q:'Tko je imao jake zube i male ruke?'},
+ {id:'tri',n:'Triceratops',f:'Imao je tri roga i veliki ovratnik oko glave. Jeo je biljke.',jede:'biljke',m:9,col:'#f0953f',bel:'#ffe0b8',q:'Tko je imao tri roga?'},
+ {id:'stego',n:'Stegosaurus',f:'Na leđima je imao velike ploče, a na repu oštre bodlje.',jede:'biljke',m:9,col:'#6fc3a0',bel:'#d8f3e6',q:'Tko je imao ploče na leđima?'},
+ {id:'brahi',n:'Brahiosaurus',f:'Imao je jako dug vrat pa je jeo lišće s vrhova drveća.',jede:'biljke',m:25,col:'#78a6e3',bel:'#d6e6fb',q:'Tko je jeo lišće s vrha drveća?'},
+ {id:'velo',n:'Velociraptor',f:'Bio je malen i jako brz, a imao je i perje.',jede:'meso',m:2,col:'#d08b4a',bel:'#f6dcbc',q:'Tko je bio malen, brz i imao perje?'},
+ {id:'ptera',n:'Pteranodon',f:'Letio je iznad mora i lovio ribu. To nije pravi dinosaur, nego leteći gmaz.',jede:'meso',m:7,col:'#9fb0cf',bel:'#e3e9f4',q:'Tko je letio?'},
+ {id:'diplo',n:'Diplodokus',f:'Bio je dugačak kao tri autobusa!',jede:'biljke',m:26,col:'#b39ddb',bel:'#ebe2f8',q:'Tko je bio dugačak kao tri autobusa?'},
+ {id:'anki',n:'Ankilosaurus',f:'Bio je oklopljen kao kornjača, a na repu je imao batinu.',jede:'biljke',m:8,col:'#b48a62',bel:'#ecd8c0',q:'Tko je imao batinu na repu?'},
+ {id:'para',n:'Parasaurolofus',f:'Na glavi je imao dugu cijev kroz koju je mogao trubiti.',jede:'biljke',m:10,col:'#f2b84b',bel:'#fdebc4',q:'Tko je imao cijev na glavi i trubio?'},
+ {id:'spino',n:'Spinosaurus',f:'Imao je veliko jedro na leđima i lovio je ribu.',jede:'meso',m:15,col:'#5f8fb8',bel:'#d3e3f2',q:'Tko je imao jedro na leđima?'},
+ {id:'igua',n:'Iguanodon',f:'Na palcu je imao oštar šiljak.',jede:'biljke',m:10,col:'#8fbf6a',bel:'#e2f1d2',q:'Tko je imao šiljak na palcu?'},
+ {id:'pahi',n:'Pahicefalosaurus',f:'Imao je tvrdu, okruglu glavu, kao kacigu.',jede:'biljke',m:4.5,col:'#de8f8f',bel:'#f8dada',q:'Tko je imao glavu kao kacigu?'}];
+const DMALI=['trex','tri','stego','brahi','velo','ptera'];
+function dinoPool(){return LVL?DINOS:DINOS.filter(d=>DMALI.includes(d.id));}
+const DG=id=>DINOS.find(d=>d.id===id);
+let DSVGN=0;
+function dinoSVG(d,sil){const SIL='#3b3552',OL=sil?SIL:'#3d2f52';const gid='dg'+(++DSVGN);
+  const C=c=>sil?SIL:c;const col=sil?SIL:`url(#${gid})`,bel=sil?SIL:`url(#${gid}b)`,dk=sil?SIL:`url(#${gid}d)`,dkc=shade(d.col,-.25);
+  const defs=sil?'':`<defs><linearGradient id="${gid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${shade(d.col,.32)}"/><stop offset=".5" stop-color="${d.col}"/><stop offset="1" stop-color="${shade(d.col,-.14)}"/></linearGradient><linearGradient id="${gid}d" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${shade(d.col,-.08)}"/><stop offset="1" stop-color="${shade(d.col,-.3)}"/></linearGradient><linearGradient id="${gid}b" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${shade(d.bel,.4)}"/><stop offset="1" stop-color="${d.bel}"/></linearGradient><radialGradient id="${gid}h" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs>`;
+  const st=(path,w,c)=>`<path d="${path}" fill="none" stroke="${OL}" stroke-width="${w+4.4}" stroke-linecap="round" stroke-linejoin="round"/><path d="${path}" fill="none" stroke="${c}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`;
+  const E=(cx,cy,rx,ry,c,extra='')=>`<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="${c}" ${extra||`stroke="${OL}" stroke-width="2.6"`}/>`;
+  const P=(p,c,w=2.6)=>`<path d="${p}" fill="${c}" stroke="${OL}" stroke-width="${w}" stroke-linejoin="round" stroke-linecap="round"/>`;
+  const hl=(cx,cy,rx,ry)=>sil?'':`<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="url(#${gid}h)"/>`;
+  const eye=(x,y,r=6)=>{if(sil)return'';r*=1.18;return `<ellipse cx="${x}" cy="${y}" rx="${r}" ry="${r*1.18}" fill="#fff" stroke="${OL}" stroke-width="2"/><ellipse cx="${x+1.2}" cy="${y+1}" rx="${r*.62}" ry="${r*.78}" fill="#2a2038"/><ellipse cx="${x+1.2}" cy="${y+2.5}" rx="${r*.4}" ry="${r*.35}" fill="#5a4a7a"/><circle cx="${x+3}" cy="${y-2}" r="${r*.3}" fill="#fff"/><circle cx="${x-.5}" cy="${y+3}" r="${r*.14}" fill="#fff"/><path d="M${x-r*.9} ${y-r*1.15} Q${x} ${y-r*1.6} ${x+r*.9} ${y-r*1.2}" fill="none" stroke="${OL}" stroke-width="2" stroke-linecap="round"/>`;};
+  const smile=(x,y,w=10)=>sil?'':`<path d="M${x-w/2} ${y} Q${x} ${y+w*.5} ${x+w/2} ${y}" fill="none" stroke="${OL}" stroke-width="2.2" stroke-linecap="round"/>`;
+  const blush=(x,y)=>sil?'':`<ellipse cx="${x}" cy="${y}" rx="5.5" ry="3.2" fill="#ff7f9e" opacity=".5"/>`;
+  const teeth=(x0,x1,y)=>{if(sil)return'';let s='';for(let x=x0;x<x1;x+=6)s+=`<path d="M${x} ${y} l3 5 l3 -5z" fill="#fff" stroke="${OL}" stroke-width="1.1"/>`;return s;};
+  const mouth=(x0,y0,cx,cy,x1,y1,t0,t1,n,line=1)=>{if(sil)return'';const q=t=>[(1-t)*(1-t)*x0+2*t*(1-t)*cx+t*t*x1,(1-t)*(1-t)*y0+2*t*(1-t)*cy+t*t*y1];let o=line?`<path d="M${x0} ${y0} Q${cx} ${cy} ${x1} ${y1}" fill="none" stroke="${OL}" stroke-width="2.4" stroke-linecap="round"/>`:'';for(let k=0;k<n;k++){const t=t0+(t1-t0)*(n>1?k/(n-1):.5);const[a,b]=q(t);o+=`<path d="M${(a-2.6).toFixed(1)} ${(b-.5).toFixed(1)} L${a.toFixed(1)} ${(b+5).toFixed(1)} L${(a+2.6).toFixed(1)} ${(b-.5).toFixed(1)} Z" fill="#fff" stroke="${OL}" stroke-width="1.1" stroke-linejoin="round"/>`;}return o;};
+  const leg=(x1,y1,x2,y2,w,c=col)=>{const kx=x1+(x2-x1)*.35,ky=y1+(y2-y1)*.35;
+    return st(`M${kx} ${ky} L${x2} ${y2-2}`,w*.92,c)+`<ellipse cx="${x1}" cy="${y1}" rx="${w*.95}" ry="${w*1.15}" fill="${c}"/>`+P(`M${x2-w*.55} ${y2+4} Q${x2-w*.6} ${y2-w*.45} ${x2} ${y2-w*.4} Q${x2+w*.75} ${y2-w*.4} ${x2+w*.8} ${y2+4} Z`,c,2.4)
+      +(sil?'':[0,1,2].map(k=>`<ellipse cx="${x2-w*.25+k*w*.38}" cy="${y2+2.5}" rx="${w*.13}" ry="${w*.1}" fill="#fff8ec" stroke="${OL}" stroke-width="1"/>`).join(''));};
+  const spots=(arr)=>sil?'':arr.map(([x,y,r])=>`<ellipse cx="${x}" cy="${y}" rx="${r}" ry="${r*.75}" fill="${dkc}" opacity=".35"/>`).join('');
+  let s='';
+  switch(d.id){
+  case 'trex':s+=P('M70 74 Q35 60 6 66 Q34 80 72 100 Z',col)+leg(92,100,86,146,16,dk)+E(100,82,40,30,col)+hl(94,68,22,10)+E(104,86,22,13,bel,'stroke-width="0" opacity=".6"')+st('M122 66 Q140 52 150 46',22,col)
+    +E(160,44,30,20,col)+P('M150 52 Q175 70 192 54 Q188 64 170 66 Q155 64 150 52 Z',col,2.5)+mouth(150,52,175,70,192,54,.42,.86,4,0)+leg(110,100,118,146,17)+st('M128 88 Q138 94 142 100',6,col)+eye(166,36)+blush(176,46)+spots([[90,70,5],[78,82,4],[105,66,4]]);break;
+  case 'tri':s+=P('M58 92 Q30 92 10 100 Q34 108 60 112 Z',col)+leg(70,112,66,146,15,dk)+leg(128,112,126,146,15,dk)+E(98,98,50,32,col)+hl(92,84,27,11)+E(100,104,29,11,bel,'stroke-width="0" opacity=".6"')
+    +E(150,82,24,30,C('#f7c56b'))+(sil?'':`<path d="M134 64 Q150 52 166 64" fill="none" stroke="${shade('#f7c56b',-.25)}" stroke-width="3"/>`)+P('M145 62 L150 34 L156 60 Z',C('#fff5d6'),2.5)+P('M160 66 L170 40 L170 68 Z',C('#fff5d6'),2.5)
+    +E(168,96,24,18,col)+P('M186 88 L198 76 L192 94 Z',C('#fff5d6'),2.5)+leg(82,114,80,146,15)+leg(118,114,120,146,15)+eye(170,88,5.5)+smile(178,104,9)+blush(160,100)+spots([[84,84,5],[100,78,4],[115,88,5]]);break;
+  case 'stego':{s+=P('M56 96 Q30 90 8 84 Q30 104 58 110 Z',col)+P('M12 84 L4 70 L18 82 Z M18 88 L12 74 L24 86 Z',C('#fff5d6'),2);
+    const pl=C('#f2786a');[[62,62,14],[80,52,16],[100,48,17],[120,52,16],[138,62,13]].forEach(([x,y,h])=>{s+=P(`M${x-11} ${y+22} L${x} ${y-h+10} L${x+11} ${y+22} Z`,pl,2.5);});
+    s+=leg(72,112,68,146,14,dk)+leg(124,112,124,146,14,dk)+E(100,96,50,28,col)+hl(94,83,27,9)+E(102,102,29,10,bel,'stroke-width="0" opacity=".6"')+st('M140 100 Q156 104 164 108',14,col)+E(172,110,16,11,col)+leg(84,114,82,146,14)+leg(116,114,118,146,14)+eye(174,105,4.5)+smile(180,115,7)+spots([[88,90,5],[108,84,4]]);break;}
+  case 'brahi':s+=P('M60 106 Q30 104 6 112 Q30 120 62 120 Z',col)+leg(72,118,70,148,15,dk)+leg(118,112,122,148,16,dk)+E(92,106,44,28,col)+hl(86,93,24,9)+E(94,110,26,8,bel,'stroke-width="0" opacity=".6"')+st('M118 92 Q140 60 150 26',18,col)
+    +E(160,22,18,12,col)+leg(84,120,84,148,15)+leg(110,116,112,148,16)+eye(162,17,4.5)+smile(170,26,7)+blush(160,28)+spots([[80,96,6],[98,90,5],[112,100,4],[140,62,3.5],[146,44,3]]);break;
+  case 'velo':s+=P('M80 78 Q40 70 6 70 Q40 84 82 92 Z',col)+(sil?'':`<path d="M14 71 l8 -6 M24 72 l8 -7 M34 73 l8 -7" stroke="${dk}" stroke-width="3" stroke-linecap="round"/>`)
+    +leg(98,92,92,124,9,dk)+st('M92 124 L88 146',8,dk)+E(102,82,30,18,col)+hl(96,74,16,6)+E(104,82,15,7,bel,'stroke-width="0" opacity=".6"')+st('M124 74 Q134 66 140 62',12,col)+E(150,58,20,11,col)+mouth(142,62,156,68,169,59,.45,.85,3)
+    +leg(110,94,116,124,9)+st('M116 124 L112 146',8,col)+P('M118 88 Q130 92 132 100 L124 96 Z',C('#fff5d6'),2)+(sil?'':`<path d="M96 70 l-4 -8 M104 68 l0 -9 M112 70 l4 -8" stroke="${dk}" stroke-width="3" stroke-linecap="round"/>`)+eye(152,53,4.5)+spots([[92,78,3],[100,74,3],[108,78,3]]);break;
+  case 'ptera':s+=P('M110 74 L20 40 Q40 70 30 96 Q70 84 110 90 Z',C(shade(d.col,.15)))+P('M114 74 L204 40 Q184 70 194 96 Q154 84 114 90 Z',C(shade(d.col,.15)))
+    +(sil?'':`<path d="M110 76 L40 52 M110 80 L36 80 M114 76 L184 52 M114 80 L188 80" stroke="${dk}" stroke-width="2" opacity=".5"/>`)
+    +E(112,82,16,12,col)+hl(106,77,8,4)+E(112,60,14,12,col)+P('M104 52 L80 38 L104 46 Z',col,2.5)+P('M120 62 L160 70 L120 70 Z',C('#f7c56b'),2.5)+st('M106 94 L102 108',5,dk)+st('M118 94 L122 108',5,dk)+eye(116,56,4.5)+blush(122,64);break;
+  case 'diplo':s+=P('M74 100 Q40 92 4 82 Q38 108 76 114 Z',col)+leg(86,114,84,146,14,dk)+leg(134,112,136,146,14,dk)+E(110,102,44,24,col)+hl(104,91,24,8)+E(112,106,26,7,bel,'stroke-width="0" opacity=".6"')+st('M146 92 Q176 74 192 58',14,col)
+    +E(200,54,14,9,col)+leg(98,116,98,146,14)+leg(124,114,126,146,14)+eye(202,50,4)+smile(208,58,6)+spots([[100,94,5],[118,90,4],[130,100,4],[166,78,3]]);break;
+  case 'anki':s+=st('M60 112 Q36 112 22 108',12,col)+E(16,106,12,10,C('#d9b98f'))+leg(80,120,78,146,15,dk)+leg(132,120,134,146,15,dk)+E(105,110,56,24,col)+hl(99,99,30,8)+E(108,115,34,6,bel,'stroke-width="0" opacity=".6"')
+    +[[70,100],[88,94],[106,92],[124,94],[140,100],[80,110],[98,106],[116,106],[132,110]].map(([x,y])=>E(x,y,6,4,C('#e8d0a8'))).join('')
+    +E(170,114,18,13,col)+P('M160 104 L156 96 L166 102 Z M176 104 L182 96 L180 106 Z',C('#e8d0a8'),2)+leg(92,122,92,146,15)+leg(120,122,122,146,15)+eye(174,110,4.5)+smile(180,120,7);break;
+  case 'para':s+=P('M64 86 Q36 84 8 94 Q36 104 66 104 Z',col)+leg(90,104,84,146,15,dk)+E(100,88,40,28,col)+hl(94,75,22,9)+E(102,92,22,10,bel,'stroke-width="0" opacity=".6"')+st('M124 74 Q140 62 150 58',16,col)
+    +st('M156 50 Q140 36 118 30',9,C('#e8664a'))+E(160,56,20,13,col)+P('M174 58 Q190 60 188 66 Q178 68 170 64 Z',col,2.5)+leg(110,104,116,146,15)+st('M126 92 L136 106',6,col)+eye(160,51,4.5)+smile(176,64,6)+blush(166,62)
+    +(sil?'':`<path d="M84 66 l6 20 M100 62 l2 22 M116 66 l-2 20" stroke="${dk}" stroke-width="4" opacity=".4" stroke-linecap="round"/>`);break;
+  case 'spino':s+=P('M64 94 Q34 90 6 96 Q34 106 66 110 Z',col)+P('M64 84 Q70 26 100 28 Q130 26 136 84 Z',C('#e46a6a'))
+    +(sil?'':[78,90,100,110,122].map(x=>`<path d="M${x} 82 L${x+(x-100)*.15} ${40+Math.abs(x-100)*.6}" stroke="${shade('#e46a6a',-.25)}" stroke-width="2.5"/>`).join(''))
+    +leg(88,106,84,146,15,dk)+E(100,92,42,24,col)+hl(94,81,23,8)+E(102,96,24,8,bel,'stroke-width="0" opacity=".6"')+st('M128 82 Q140 76 148 74',15,col)+E(162,72,26,11,col)+P('M176 68 L198 72 L178 80 Z',col,2.5)+mouth(148,76,170,82,194,73,.4,.85,4)
+    +leg(110,108,116,146,15)+st('M128 92 L136 104',6,col)+eye(158,66,4.5)+spots([[86,90,4],[104,86,4]]);break;
+  case 'igua':s+=P('M66 88 Q36 86 8 98 Q36 106 68 106 Z',col)+leg(90,106,84,146,15,dk)+E(100,90,40,28,col)+hl(94,77,22,9)+E(102,94,22,10,bel,'stroke-width="0" opacity=".6"')+st('M124 74 Q138 64 146 60',16,col)
+    +E(158,56,20,14,col)+P('M172 56 Q188 60 186 66 Q176 70 168 64 Z',col,2.5)+leg(110,106,116,146,15)+st('M126 92 L138 108',8,col)+P('M136 104 L148 96 L142 108 Z',C('#fff5d6'),2)+eye(160,50,4.5)+smile(176,64,6)+blush(164,62)+spots([[88,80,5],[104,76,4],[112,88,4]]);break;
+  case 'pahi':s+=P('M70 92 Q40 88 10 96 Q40 106 72 108 Z',col)+leg(92,108,86,146,14,dk)+E(102,92,36,26,col)+hl(96,80,19,9)+E(104,96,20,9,bel,'stroke-width="0" opacity=".6"')+st('M124 78 Q134 70 140 66',15,col)
+    +E(152,64,20,16,col)+P('M134 60 Q136 30 156 32 Q174 34 170 60 Z',C('#f4c38a'))+(sil?'':[[138,52],[148,40],[160,40],[168,50]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="3" fill="${shade('#f4c38a',-.25)}"/>`).join(''))
+    +leg(112,108,118,146,14)+st('M126 94 L134 106',6,col)+eye(158,64,4.5)+smile(166,74,6)+blush(162,72);break;}
+  return `<svg viewBox="0 0 215 155" class="dsvg" xmlns="http://www.w3.org/2000/svg">${defs}${sil?'':'<ellipse cx="105" cy="149" rx="85" ry="5" fill="#000" opacity=".08"/>'}${s}</svg>`;}
+function shade(hex,k){const n=parseInt(hex.slice(1),16);let r=n>>16,g=(n>>8)&255,b=n&255;const f=v=>Math.max(0,Math.min(255,Math.round(k<0?v*(1+k):v+(255-v)*k)));return '#'+[f(r),f(g),f(b)].map(v=>v.toString(16).padStart(2,'0')).join('');}
+function roar(big=1){if(big){tone(160,60,.7,'sawtooth',.07);tone(240,80,.6,'square',.025,.04);}else tone(500,260,.25,'triangle',.06);}
+function dinoName(d){return d.say||d.n;}
+AREAS.push(['Dinosauri','🦕',['Dinosauri'],[10,30,60]]);
+function modDino(){menu('Dinosauri',CDI,'Upoznaj dinosaure i igraj se!',[
+  {n:'Upoznaj dinosaure',ic:'🦕',go:dinoAtlas},
+  {n:'Prepoznaj dinosaura',ic:'❓',go:dinoPrepoznaj},
+  {n:'Pronađi dinosaura',ic:'👂',go:dinoNadji},
+  {n:'Biljojed ili mesojed',ic:'🌿🍖',go:dinoJede},
+  {n:'Pronađi sjenu',ic:'🌑',go:dinoSjena},
+  {n:'Tko je veći?',ic:'📏',go:dinoVeci},
+  {n:'Zanimljivosti (kviz)',ic:'💡',go:dinoZanimljivo},
+  {n:'Dinosauri u Hrvatskoj',ic:'🇭🇷',go:dinoHr}]);}
+let dSeen=load('dseen',[]);
+function dinoAtlas(){const w=screen('Upoznaj dinosaure',modDino,CDI);w.appendChild(el('p','hello','Dodirni dinosaura i poslušaj kako se zove.'));
+  const big=el('div','card dinocard');big.style.display='none';w.appendChild(big);
+  const g=el('div','dgrid');DINOS.forEach(d=>{const b=button('dtile'+(dSeen.includes(d.id)?' seen':''),dinoSVG(d)+`<span>${d.n}</span>`,()=>show(d),d.n);g.appendChild(b);});w.appendChild(g);
+  function show(d){big.style.display='';big.innerHTML='';big.appendChild(el('div','dbig',dinoSVG(d)));big.appendChild(el('div','word',d.n));
+    const meta=el('p','sub',`${d.jede==='meso'?'🍖 Mesojed':'🌿 Biljojed'} · dug oko ${String(d.m).replace('.',',')} m`);big.appendChild(meta);big.appendChild(el('p','dfact',d.f));
+    big.appendChild(button('btn soft','🔊 Još jednom',()=>{roar(d.jede==='meso');say(`${dinoName(d)}. ${d.f}`);}));
+    roar(d.jede==='meso');setTimeout(()=>say(`${dinoName(d)}. ${d.f}`),450);big.scrollIntoView({behavior:'smooth',block:'nearest'});
+    if(!dSeen.includes(d.id)){dSeen.push(d.id);store('dseen',dSeen);[...g.children][DINOS.indexOf(d)].classList.add('seen');stat('Dinosauri: upoznaj',true);
+      if(dSeen.length===DINOS.length){addStar(3);confetti(120);setTimeout(()=>toast('🦕 Upoznala si sve dinosaure! +3 ⭐'),1500);}}}
+  say('Dodirni dinosaura i poslušaj kako se zove.',{prompt:true});}
+function dinoOpts(ans,n,pool){return shuffle([ans,...shuffle(pool.filter(d=>d!==ans)).slice(0,n-1)]);}
+function dinoPrepoznaj(){let last;quiz({title:'Prepoznaj dinosaura',stat:'Dinosauri: prepoznaj',back:modDino,color:CDI,make:r=>{const pool=dinoPool();let d;do{d=pick(pool);}while(d===last);last=d;
+  return{text:'Koji je ovo dinosaur?',speak:'Koji je ovo dinosaur?',extra:el('div','dbig',dinoSVG(d)),options:dinoOpts(d,LVL?4:3,pool).map(x=>({v:x.id,html:`<span class="dname">${x.n}</span>`,say:dinoName(x)})),answer:d.id};}});}
+function dinoNadji(){let last;quiz({title:'Pronađi dinosaura',stat:'Dinosauri: pronađi',back:modDino,color:CDI,make:r=>{const pool=dinoPool();let d;do{d=pick(pool);}while(d===last);last=d;
+  return{text:`Gdje je <b>${d.n}</b>?`,speak:`Gdje je ${dinoName(d)}?`,options:dinoOpts(d,LVL?4:3,pool).map(x=>({v:x.id,html:dinoSVG(x),cls:'dopt',say:dinoName(x)})),answer:d.id};}});}
+function dinoJede(){let last;quiz({title:'Biljojed ili mesojed',stat:'Dinosauri: biljojed ili mesojed',back:modDino,color:CDI,make:r=>{const pool=dinoPool();let d;do{d=pick(pool);}while(d===last);last=d;
+  return{text:`Što je jeo <b>${d.n}</b>?`,speak:`Što je jeo ${dinoName(d)}? Biljke ili meso?`,extra:el('div','dbig',dinoSVG(d)),options:[{v:'biljke',html:'<span class="dname">🌿<br>Biljojed</span>',say:'Biljojed'},{v:'meso',html:'<span class="dname">🍖<br>Mesojed</span>',say:'Mesojed'}],answer:d.jede};}});}
+function dinoSjena(){let last;quiz({title:'Pronađi sjenu',stat:'Dinosauri: sjena',back:modDino,color:CDI,make:r=>{const pool=dinoPool();let d;do{d=pick(pool);}while(d===last);last=d;
+  return{text:'Koja je sjena ovog dinosaura?',speak:'Pronađi sjenu ovog dinosaura.',extra:el('div','dbig',dinoSVG(d)),options:dinoOpts(d,LVL?4:3,pool).map(x=>({v:x.id,html:dinoSVG(x,true),cls:'dopt'})),answer:d.id};}});}
+function dinoVeci(){quiz({title:'Tko je veći?',stat:'Dinosauri: veći',back:modDino,color:CDI,make:r=>{const pool=dinoPool();let a,b;do{[a,b]=shuffle(pool).slice(0,2);}while(Math.max(a.m,b.m)/Math.min(a.m,b.m)<(LVL?1.6:2.4));
+  const ask=LVL&&r%2?'manji':'veći';const ans=(ask==='veći')===(a.m>b.m)?a:b;
+  return{text:`Koji je dinosaur bio <b>${ask.toUpperCase()}</b>?`,speak:`Koji je dinosaur bio ${ask}? ${dinoName(a)} ili ${dinoName(b)}?`,options:[a,b].map(x=>({v:x.id,html:dinoSVG(x)+`<span class="dname" style="font-size:18px">${x.n}</span>`,cls:'dopt',say:`${dinoName(x)}, dug oko ${String(x.m).replace('.',',')} metara`})),answer:ans.id};}});}
+function dinoZanimljivo(){let last;quiz({title:'Zanimljivosti o dinosaurima',stat:'Dinosauri: zanimljivosti',back:modDino,color:CDI,make:r=>{const pool=DINOS;let d;do{d=pick(pool);}while(d===last);last=d;
+  return{text:d.q,speak:d.q,options:dinoOpts(d,LVL?4:3,pool).map(x=>({v:x.id,html:dinoSVG(x),cls:'dopt',say:dinoName(x)})),answer:d.id};}});}
+function dinoHr(){const w=screen('Dinosauri u Hrvatskoj',modDino,CDI);const c=el('div','card');c.appendChild(el('div','emo','🦶🇭🇷'));c.appendChild(el('div','word','Tragovi na Brijunima'));
+  const t='Znaš li da su i u Hrvatskoj živjeli dinosauri? Na Brijunima i na drugim mjestima u Istri pronađeni su pravi otisci njihovih stopala u kamenu. Stari su više od sto milijuna godina! Kad posjetiš Brijune, možeš ih vidjeti svojim očima.';
+  c.appendChild(el('p','dfact',t));c.appendChild(button('btn soft','🔊 Poslušaj',()=>say(t)));c.appendChild(button('btn','Kviz zanimljivosti ▶',dinoZanimljivo));w.appendChild(c);say(t);stat('Dinosauri: hrvatska',true);}
 
 applyKid();KID?home():kidSetup(true);
 window.__app={enBroji,leonaKaze,micBlocked,pageSvg,PAGES,modEngleski,enGrid,enQuiz,modKalendar,danasScreen,mjeseciScreen,mjeseciQuiz,obuciQuiz,modPromet,semaforQuiz,prijeciQuiz,znakQuiz,vozilaGrid,vozilaQuiz,programer,modProgramer,modUsporedi,suprotnoQuiz,gdjeQuiz,duljeQuiz,tezeQuiz,velicina,rimeQuiz,zadnjiQuiz,porediQuiz,modZdravlje,tijelo2Quiz,tanjurQuiz,navikeQuiz,zubi,modZanimanja,zanGrid,alatQuiz,trebamQuiz,modOtpad,kanteScreen,otpadQuiz,modSvemir,sustav,planetiGrid,danNocQuiz,svemirQuiz,birthdayScreen,adventScreen,modSnimi,daysToBirthday,home,nestalo,modHrvatska,zastava,factGrid,hrKviz,zastavaQuiz,modLinije,lineTrace,dots,labirint,modBrojalice,brojalica,modVrt,modMedalje,kvizLR,modKviz,kvizRun,glasQuiz,slozi,slogQuiz,citajQuiz,redniQuiz,usporediQuiz,piktoQuiz,novacQuiz,plati,satQuiz,memory,nizQuiz,uljezQuiz,slagalica,sjenaQuiz,modSlikovnice,story,storyQuiz,daniScreen,daniQuiz,dobaQuiz,tijeloQuiz,vocQuiz,prometQuiz,liceQuiz,sitQuiz,doQuiz,modGlazba,startPath,parentCorner,restScreen,modBrojke,home,modSlova,slovaQuiz,traceScreen,colorPage,modBojanka,mijesaj,zbrojiQuiz,obliciGrid,zivGrid,brojCard,say};
